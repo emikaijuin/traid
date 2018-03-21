@@ -1,11 +1,31 @@
 class UsersController < ApplicationController
-    
-  def new
+  include SessionsHelper
+
+  def index
+    @user = current_user
   end
   
+  def new
+    @user = User.new
+  end
+  
+  def create
+    if params[:password] == params[:password_confirmation]
+      @user = User.new(user_params)
+      if @user.save
+        log_in @user
+        flash[:notice] = "Welcome to Traid, #{@user.first_name}!"
+        redirect_to users_path
+      else
+        flash[:notice] = "Sorry, there was an error creating your profile, please try again."
+        render :new
+      end
+    end
+  end
+      
   private 
   
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :username, :birthday, :email, :phone_number, :encrypted_password, :address, :secondary_address, :city, :state, :country)
+    params.require(:user).permit(:first_name, :last_name, :username, :birthday, :email, :phone_number, :password, :password_confirmation, :address, :secondary_address, :city, :state, :country)
   end
 end
