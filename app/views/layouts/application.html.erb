@@ -7,12 +7,47 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <!--Facebook Login-->
+  <script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '{your-app-id}',
+        cookie     : true,
+        xfbml      : true,
+        version    : '{latest-api-version}'
+      });
+        
+      FB.AppEvents.logPageView();   
+        
+    };
+  
+    (function(d, s, id){
+       var js, fjs = d.getElementsByTagName(s)[0];
+       if (d.getElementById(id)) {return;}
+       js = d.createElement(s); js.id = id;
+       js.src = "https://connect.facebook.net/en_US/sdk.js";
+       fjs.parentNode.insertBefore(js, fjs);
+     }(document, 'script', 'facebook-jssdk'));
+  </script>
+  <!-- / Facebook Login-->
 
   <%= current_user %>
   <% if logged_in? %>
     <%= link_to "Log out", sign_out_path, method: :delete %>
   <% else %>
     <%= link_to "Sign in", sign_in_path %>
+    <%= link_to "Sign in with Facebook", "/auth/facebook" %>
+    <!--FACEBOOK SDK-->
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&autoLogAppEvents=1&version=v2.12&appId=1040839342723303';
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+    </script>
+    <!--FACEBOOK SDK-->
   <% end %>
 
 <%= yield %>
