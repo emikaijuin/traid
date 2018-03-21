@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 20180321092654) do
     t.string   "country"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "remember_token"
+    t.string   "remember_digest"
   end
 
 end
