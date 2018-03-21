@@ -2,6 +2,13 @@ class User < ApplicationRecord
   has_secure_password
   attr_accessor :remember_token
   
+  validates_presence :email, unique: true
+  validates_presence :username
+  validates_presence :first_name
+  validates_presence :last_name
+  
+  # Secure sessions methods 
+  
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
     BCrypt::Password.create(string, cost: cost)
