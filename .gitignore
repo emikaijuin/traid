@@ -18,3 +18,5 @@
 
 # Ignore application keys
 config/secrets.yml
+
+.byebug_history
