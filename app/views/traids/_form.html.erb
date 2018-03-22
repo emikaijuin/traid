@@ -1,3 +1,4 @@
+
 <%= form_for(@traid) do |f| %>
   <% if @traid.errors.any? %>
     <div id="error_explanation">
@@ -29,6 +30,8 @@
     
     <%= f.label :quantity %>
     <%= f.text_field :quantity %>
+    
+    <%= hidden_field_tag(:traid_user_id, params[:traid_user_id]) %>
     
     <%= f.submit %>
   </div>

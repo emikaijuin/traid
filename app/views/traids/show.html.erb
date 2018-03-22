@@ -1,11 +1,16 @@
 <p id="notice"><%= notice %></p>
-<% @traids.each do |traid| %>
-  <%= @traid.title %>
-  <%= @traid.conditions %>
-  <%= @traid.offer %>
-  <%= @traid.offer_subtype + " (" + @traid.offer_type + ")" %>
-  <%= @traid.quantity %>
-<% end %>
 
-<%= link_to 'Edit', edit_traid_path(@traid) %> |
-<%= link_to 'Back', traids_path %>
+<div>
+  <div>Status: <%= Traid.status(@current_user_traid.status, @requested_user_traid.status %></div>
+  <div id = "current-user-traid-copy">
+    <h1>My Traid Terms</h1>
+    <%= render "traids/traid_information", traid: @current_user_traid %>
+    <%= link_to 'Negotiate Traid', edit_traid_path(@traid) %> 
+  </div>
+  
+  <div id = "requested-user-traid-copy">
+    <h1><%=@requested_user_traid.user.username%>'s Traid Terms</h1>
+    <%= render "traids/traid_information", traid: @requested_user_traid %>
+  </div>
+
+</div>
