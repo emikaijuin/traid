@@ -10,7 +10,11 @@ class TraidsController < ApplicationController
   end
 
   def show
-    @traids = Traid.where(key: @traid.key)
+    traids = Traid.where(key: @traid.key)
+    traids.each do |traid|
+      @current_user_traid = traid if traid.user_id == current_user.id
+      @requested_user_traid = traid if traid.user_id != current_user.id
+    end
   end
 
   def new
