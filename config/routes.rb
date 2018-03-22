@@ -3,6 +3,7 @@ include SessionsHelper
 Rails.application.routes.draw do
   
 
+  resources :traids
   get 'welcome/index'
 
   # Sessions paths
