@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   
   # Welcome page
   get "/" => "welcome#index"
-  root :to => logged_in? ? "welcome#index" : "users#index"
+  root :to => "welcome#index"
   
   # Resources
   resources :users
