@@ -1,0 +1,17 @@
+<h2><%= @user.username %></h2>
+<%= @user.city %>
+
+<h4>Is offering:</h4>
+<% @user.is_seeking.each do |s| %>
+  <%= s %>
+<% end %>
+
+<h4>Is seeking:</h4>
+<%= @user.is_offering.each do |o| %>
+  <%= o %>
+<% end %>
+
+<%= form_for(:traid, url: new_traid_path, :method => :get) do |f| %>
+  <% f.hidden_field :user_id, :value => params[:id] %>
+<%= f.submit "Traid with #{@user.username}!" %>
+<% end %>
