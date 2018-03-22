@@ -29,6 +29,7 @@ class TraidsController < ApplicationController
     @trade_1.status = "Requested"
     @traid_2 = Traid.create_copy(params[:traid_user_id], @traid_1.key) if @traid_1.save
 
+
     respond_to do |format|
       if @traid_2.save
         format.html { redirect_to @traid_1, notice: "Traid was sent to #{@user_2} (ID: #{@traid_1.key})" }

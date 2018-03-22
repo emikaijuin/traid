@@ -19,5 +19,7 @@ Rails.application.routes.draw do
   
   # Resources
   resources :users
+  resources :search, only: [:index]
+  post "/search" => "search#search"
   
 end

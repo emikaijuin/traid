@@ -1,6 +1,17 @@
 class Traid < ApplicationRecord
+  
+  # Search 
+  include PgSearch
+  multisearchable :against => [:city, :is_offering, :is_seeking]
+
+  scope :city, -> (city) { where( "city ILIKE :city", city: "%#{city}%" )}
+  scope :is_offering, -> (is_offering) { where("is_offering ILIKE :is_offering", is_offering: "%#{is_offering}%")}
+  scope :is_seeking, -> (is_seeking) { where("is_offering ILIKE :is_seeking", is_seeking: "%#{is_seeking}%")}
+
+  # Associations
   belongs_to :user
   before_save :create_key
+  
   
   enum status: [ :requested, :negotiating, :canceled, :finalized ]
   
