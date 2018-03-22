@@ -1,4 +1,10 @@
 <p id="notice"><%= notice %></p>
 
+<%= @traid.title %>
+<%= @traid.conditions %>
+<%= @traid.offer %>
+<%= @traid.offer_subtype + " (" + @traid.offer_type + ")" %>
+<%= @traid.quantity %>
+
 <%= link_to 'Edit', edit_traid_path(@traid) %> |
 <%= link_to 'Back', traids_path %>

@@ -1,11 +1,16 @@
 class TraidsController < ApplicationController
+  include SessionsHelper
+  
   before_action :set_traid, only: [:show, :edit, :update, :destroy]
+  before_action :require_login
+  before_action :validate_user, only: [:show, :edit, :update, :destroy]
 
   def index
     @traids = Traid.all
   end
 
   def show
+    # @traid = Traid.find(params[:id])
   end
 
   def new
@@ -16,7 +21,7 @@ class TraidsController < ApplicationController
   end
 
   def create
-    @traid = Traid.new(traid_params)
+    @traid = current_user.traids.new(traid_params)
 
     respond_to do |format|
       if @traid.save
@@ -55,6 +60,21 @@ class TraidsController < ApplicationController
     end
 
     def traid_params
-      params.fetch(:traid, {})
+      params.require(:traid).permit(:title, :conditions, :offer, :offer_type, :offer_subtype, :quantity)
     end
+    
+    def require_login
+      if !logged_in?
+        flash[:danger] = "You must be logged in to do that."
+        redirect_to root_url
+      end
+    end
+    
+    def validate_user
+      if !current_user.traids.include?(Traid.find(params[:id]))
+        flash[:danger] = "You must be logged in to do that."
+        redirect_to root_url
+      end
+    end
+        
 end

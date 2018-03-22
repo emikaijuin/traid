@@ -12,6 +12,24 @@
   <% end %>
 
   <div class="actions">
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+    
+    <%= f.label :conditions %>
+    <%= f.text_area :conditions %>
+    
+    <%= f.label :offer %>
+    <%= f.text_field :offer %>
+    
+    <%= f.label :offer_type %>
+    <%= f.select :offer_type, options_for_select(Traid.offer_types)%>
+
+    <%= f.label :offer_subtype %>
+    <%= f.select :offer_subtype, options_for_select(Traid.offer_subtypes)%>
+    
+    <%= f.label :quantity %>
+    <%= f.text_field :quantity %>
+    
     <%= f.submit %>
   </div>
 <% end %>

@@ -17,7 +17,6 @@
 /tmp
 
 # Ignore application keys
-config/secrets.yml
 config/application.yml
 
 .byebug_history

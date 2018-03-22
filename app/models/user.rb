@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_secure_password
   attr_accessor :remember_token
+  has_many :traids
   
   validates :email, 
     uniqueness: true, 
