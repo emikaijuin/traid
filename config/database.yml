@@ -26,4 +26,4 @@ production:
   <<: *default
   database: traidr_development
   username: traidr_development
-  password: <%= ENV['AIRBNB_PRODUCTION_DATABASE_PASSWORD']%>
+  password: <%= ENV['TRAIDR_PRODUCTION_DATABASE_PASSWORD']%>
