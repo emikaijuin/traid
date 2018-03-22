@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180322021912) do
+ActiveRecord::Schema.define(version: 20180322060042) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +58,9 @@ ActiveRecord::Schema.define(version: 20180322021912) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "remember_digest"
+    t.string   "has_to_offer",      array: true
+    t.string   "is_seeking",        array: true
+    t.string   "about"
   end
 
   add_foreign_key "authentications", "users"
