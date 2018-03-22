@@ -6,11 +6,10 @@ class TraidsController < ApplicationController
   before_action :validate_user, only: [:show, :edit, :update, :destroy]
 
   def index
-    @traids = Traid.all
   end
 
   def show
-    # @traid = Traid.find(params[:id])
+    @traids = Traid.where(key: @traid.key)
   end
 
   def new
