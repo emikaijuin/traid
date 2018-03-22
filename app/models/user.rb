@@ -1,8 +1,19 @@
 class User < ApplicationRecord
+  
+  # Search 
+  include PgSearch
+  multisearchable :against => [:city, :is_offering, :is_seeking]
+
+  scope :city, -> (city) { where( "city ILIKE :city", city: "%#{city}%" )}
+  scope :is_offering, -> (is_offering) { where("is_offering ILIKE :is_offering", is_offering: "%#{is_offering}%")}
+  scope :is_seeking, -> (is_seeking) { where("is_offering ILIKE :is_seeking", is_seeking: "%#{is_seeking}%")}
+  
+  # Validations and Associations 
   has_secure_password
   attr_accessor :remember_token
   has_many :traids
   
+
   validates :email, 
     uniqueness: true, 
     presence: true

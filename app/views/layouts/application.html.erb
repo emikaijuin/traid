@@ -49,6 +49,11 @@
     </script>
     <!--FACEBOOK SDK-->
   <% end %>
+  
+  <%= form_tag search_index_path, :method => :get  do %>
+    <%= text_field_tag 'search', nil, class: 'input', list: "list" %>
+    <datalist id="list"></datalist>
+  <% end %>
 
 <%= yield %>
 

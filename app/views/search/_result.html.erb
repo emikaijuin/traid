@@ -1,0 +1,8 @@
+<% if user.city == current_user.city %> <!-- Placeholder - will update search function to automatically filter to Current User's community -->
+    <div>
+      <p><strong><%= user.username %></strong></p>
+      <p>Is seeking: <%=user.is_seeking%></p>
+      <p>Is offering: <%=user.is_offering%></p>
+      <p><%= link_to "View more...", "users/#{user.id}"%></p>
+    </div>
+<% end %>
