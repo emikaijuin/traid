@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 20180322060042) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "remember_digest"
-    t.string   "has_to_offer",      array: true
+    t.string   "is_offering",       array: true
     t.string   "is_seeking",        array: true
     t.string   "about"
   end
