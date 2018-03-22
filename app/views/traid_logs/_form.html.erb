@@ -1,0 +1,17 @@
+<%= form_for(@traid_log) do |f| %>
+  <% if @traid_log.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@traid_log.errors.count, "error") %> prohibited this traid_log from being saved:</h2>
+
+      <ul>
+      <% @traid_log.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
