@@ -1,6 +1,7 @@
+<p id="notice"><%= notice %></p>
+
 <div>
-  <p id="notice"><%= notice %></p>
-  
+  <div>Status: <%= Traid.status(@current_user_traid.status, @requested_user_traid.status %></div>
   <div id = "current-user-traid-copy">
     <h1>My Traid Terms</h1>
     <%= render "traids/traid_information", traid: @current_user_traid %>
