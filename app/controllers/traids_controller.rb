@@ -1,7 +1,9 @@
 class TraidsController < ApplicationController
+  include SessionsHelper
+  
   before_action :set_traid, only: [:show, :edit, :update, :destroy]
   before_action :require_login
-  before_action :validate_user, except: [:index]
+  before_action :validate_user, only: [:show, :edit, :update, :destroy]
 
   def index
     @traids = Traid.all
@@ -69,7 +71,7 @@ class TraidsController < ApplicationController
     end
     
     def validate_user
-      if current_user != User.find(params[:id])
+      if !current_user.traids.include?(Traid.find(params[:id]))
         flash[:danger] = "You must be logged in to do that."
         redirect_to root_url
       end
