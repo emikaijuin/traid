@@ -3,8 +3,7 @@ class Traid < ApplicationRecord
   # Associations
   belongs_to :user
   before_save :create_key
-  
-  
+
   enum status: [ :requested, :negotiating, :canceled, :finalized ]
   
   def create_key
