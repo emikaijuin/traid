@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Traid Logs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @traid_logs.each do |traid_log| %>
+      <tr>
+        <td><%= link_to 'Show', traid_log %></td>
+        <td><%= link_to 'Edit', edit_traid_log_path(traid_log) %></td>
+        <td><%= link_to 'Destroy', traid_log, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Traid log', new_traid_log_path %>
