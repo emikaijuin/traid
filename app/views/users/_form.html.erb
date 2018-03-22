@@ -15,7 +15,7 @@
     <div>
       <div>
           <p><%= f.label :username %>: <%= f.text_field :username %></p>
-          <p>Don't worry, you can change your username whenever you'd like.</p>
+          <p>You can change your username whenever you'd like.</p>
       </div>
       <p><%= f.label :email %>: <%= f.text_field :email %></p>
       <p><%= f.label :password %>: <%= f.password_field :password %></p>
@@ -31,6 +31,10 @@
         <span><%=f.label :zip_code %>: <%= f.text_field :zip_code %></span>
       </p>
       <p><%=f.label :country %>: <%= f.text_field :country %></p>
+    </div>
+    
+    <div>
+      <%= render "users/traid_interests", f: f %>
     </div>
     
     <div>
