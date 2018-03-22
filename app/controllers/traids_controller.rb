@@ -20,11 +20,15 @@ class TraidsController < ApplicationController
   end
 
   def create
-    @traid = current_user.traids.new(traid_params)
+    @traid_1 = current_user.traids.new(traid_params)
+    if @traid_1.save
+      # Generate Traid version to be sent to requested User
+      @traid_2 = Traid.create_copy(params[:traid_user_id], traid_params, @traid_1.key)
+    end
 
     respond_to do |format|
-      if @traid.save
-        format.html { redirect_to @traid, notice: 'Traid was successfully created.' }
+      if @traid_2.save
+        format.html { redirect_to @traid_1, notice: "Traid was sent to #{@user_2} (ID: #{@traid_1.key})" }
         format.json { render :show, status: :created, location: @traid }
       else
         format.html { render :new }
@@ -59,7 +63,7 @@ class TraidsController < ApplicationController
     end
 
     def traid_params
-      params.require(:traid).permit(:title, :conditions, :offer, :offer_type, :offer_subtype, :quantity)
+      params.require(:traid).permit(:title, :conditions, :offer, :offer_type, :offer_subtype, :quantity, :traid_user_id)
     end
     
     def require_login
