@@ -32,6 +32,7 @@ class TraidsController < ApplicationController
 
     respond_to do |format|
       if @traid_2.save
+        TraidLog.add_traid_to_log(@traid_2.key)
         format.html { redirect_to @traid_1, notice: "Traid was sent to #{@user_2} (ID: #{@traid_1.key})" }
         format.json { render :show, status: :created, location: @traid }
       else
@@ -44,6 +45,7 @@ class TraidsController < ApplicationController
   def update
     respond_to do |format|
       if @traid.update(traid_params)
+        TraidLog.add_traid_to_log(@traid.key)
         format.html { redirect_to @traid, notice: 'Traid was successfully updated.' }
         format.json { render :show, status: :ok, location: @traid }
       else
