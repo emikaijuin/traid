@@ -3,6 +3,7 @@ class TraidsController < ApplicationController
   
   before_action :set_traid, only: [:show, :edit, :update, :destroy]
   before_action :require_login
+  before_action :redirect_user_to_their_traid_version_show_page, only: :show
   before_action :validate_user, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -21,10 +22,7 @@ class TraidsController < ApplicationController
 
   def create
     @traid_1 = current_user.traids.new(traid_params)
-    if @traid_1.save
-      # Generate Traid version to be sent to requested User
-      @traid_2 = Traid.create_copy(params[:traid_user_id], traid_params, @traid_1.key)
-    end
+    @traid_2 = Traid.create_copy(params[:traid_user_id], traid_params, @traid_1.key) if @traid_1.save
 
     respond_to do |format|
       if @traid_2.save
@@ -79,5 +77,13 @@ class TraidsController < ApplicationController
         redirect_to root_url
       end
     end
-        
+    
+    def redirect_user_to_their_traid_version_show_page
+      if @traid.user_id != current_user.id && !Traid.where(key: @traid.key, user_id: current_user.id).empty?
+        redirect_to traid_path(Traid.find_by(key: @traid.key, user_id: current_user.id))
+      elsif @traid.user_id != current_user.id && Traid.where(key: @traid.key, user_id: current_user.id).empty?
+        redirect_to root_url
+      end
+    end    
+    
 end
