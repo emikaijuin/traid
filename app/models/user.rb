@@ -2,10 +2,15 @@ class User < ApplicationRecord
   has_secure_password
   attr_accessor :remember_token
   
-  validates_presence :email, unique: true
-  validates_presence :username
-  validates_presence :first_name
-  validates_presence :last_name
+  validates :email, 
+    uniqueness: true, 
+    presence: true
+  validates :username, 
+    presence: true
+  validates :first_name, 
+    presence: true
+  validates :last_name, 
+    presence: true
   
   # Secure sessions methods 
   
