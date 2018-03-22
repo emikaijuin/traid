@@ -5,7 +5,7 @@ class SearchController < ApplicationController
   end
   
   def ajax_city_results
-    @results = Traid.search_cities(params["query"])
+    @results = User.search_cities(params["query"])
     render json: @results
   end
   
