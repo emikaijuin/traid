@@ -1,0 +1,7 @@
+<div>
+  <% if !@results.empty? %>
+    <% @results.each do |result| %>
+      <%= render '/search/result', user: User.find(result[:searchable_id])%>
+    <% end %>
+  <% end %>
+</div>
