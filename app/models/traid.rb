@@ -26,8 +26,8 @@ class Traid < ApplicationRecord
       end
     end
     
-    def create_copy(user_id, traid_params, key)
-      @traid_copy = Traid.new(traid_params)
+    def create_copy(user_id, key)
+      @traid_copy = Traid.new
       @traid_copy.user = User.find(user_id)
       @traid_copy.key = key
       @traid_copy

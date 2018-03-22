@@ -1,15 +1,18 @@
 <p id="notice"><%= notice %></p>
 
 <div>
-  <div>Status: <%= Traid.status(@current_user_traid.status, @requested_user_traid.status %></div>
+  <div>
+    <h2>Status: <%= Traid.status(@current_user_traid.status, @requested_user_traid.status) %></h2>
+  </div>
+  
   <div id = "current-user-traid-copy">
-    <h1>My Traid Terms</h1>
+    <h3>My Traid Terms</h3>
     <%= render "traids/traid_information", traid: @current_user_traid %>
     <%= link_to 'Negotiate Traid', edit_traid_path(@traid) %> 
   </div>
   
   <div id = "requested-user-traid-copy">
-    <h1><%=@requested_user_traid.user.username%>'s Traid Terms</h1>
+    <h3><%=@requested_user_traid.user.username%>'s Traid Terms</h3>
     <%= render "traids/traid_information", traid: @requested_user_traid %>
   </div>
 
