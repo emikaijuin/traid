@@ -26,6 +26,7 @@ class TraidsController < ApplicationController
 
   def create
     @traid_1 = current_user.traids.new(traid_params)
+    @trade_1.status = "Requested"
     @traid_2 = Traid.create_copy(params[:traid_user_id], traid_params, @traid_1.key) if @traid_1.save
 
     respond_to do |format|
