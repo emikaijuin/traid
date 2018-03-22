@@ -1,3 +1,4 @@
+<%= flash[:notice] %>
 <h2><%= @user.username %></h2>
 <%= @user.city %>
 
@@ -12,6 +13,6 @@
 <% end %>
 
 <%= form_for(:traid, url: new_traid_path, :method => :get) do |f| %>
-  <% f.hidden_field :user_id, :value => params[:id] %>
+  <%= hidden_field_tag(:traid_user_id, params[:id]) %> 
 <%= f.submit "Traid with #{@user.username}!" %>
 <% end %>
