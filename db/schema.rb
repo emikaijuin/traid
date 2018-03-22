@@ -28,8 +28,16 @@ ActiveRecord::Schema.define(version: 20180322021912) do
   add_index "authentications", ["user_id"], name: "index_authentications_on_user_id", using: :btree
 
   create_table "traids", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "title"
+    t.string   "conditions"
+    t.string   "offer"
+    t.string   "offer_type"
+    t.string   "offer_subtype"
+    t.string   "quantity"
+    t.string   "key"
+    t.integer  "user_id",       limit: 8, null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "users", force: :cascade do |t|
