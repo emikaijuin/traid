@@ -1,1 +1,60 @@
-users index
+<div class="columns" id="user-homepage-container">
+  <div class="column is-two-thirds">
+      <div id="user-homepage-community-news">
+        COMMUNITY NEWS
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Sed sed ligula porttitor, mollis ex nec, ultricies est.
+        Duis sollicitudin dolor laoreet, finibus elit vitae, placerat purus.
+        Pellentesque et erat sed eros porttitor facilisis.
+        Maecenas venenatis magna eu lacus euismod maximus.
+        Fusce id mi sollicitudin, rhoncus velit non, ornare tellus.
+        Etiam placerat ante quis arcu mattis convallis.
+        Praesent dignissim dui eget tristique egestas.
+        Duis suscipit ipsum vel lacinia scelerisque.
+      </div>
+      <div id="user-homepage-recommended-for-user">
+        RECOMMENDED FOR USER
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Sed sed ligula porttitor, mollis ex nec, ultricies est.
+        Duis sollicitudin dolor laoreet, finibus elit vitae, placerat purus.
+        Pellentesque et erat sed eros porttitor facilisis.
+        Maecenas venenatis magna eu lacus euismod maximus.
+        Fusce id mi sollicitudin, rhoncus velit non, ornare tellus.
+        Etiam placerat ante quis arcu mattis convallis.
+        Praesent dignissim dui eget tristique egestas.
+        Duis suscipit ipsum vel lacinia scelerisque.        
+      </div>        
+  </div>
+  
+  <div class="column is-one-third">
+    <div id="user-homepage-notifications">
+        NOTIFICATIONS
+        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+        <li>Sed sed ligula porttitor, mollis ex nec, ultricies est.</li>
+        <li>Duis sollicitudin dolor laoreet, finibus elit vitae, placerat purus.</li>
+        <li>Pellentesque et erat sed eros porttitor facilisis.</li>
+        <li>Maecenas venenatis magna eu lacus euismod maximus.</li>
+        <li>Fusce id mi sollicitudin, rhoncus velit non, ornare tellus.</li>
+        <li>Etiam placerat ante quis arcu mattis convallis.</li>
+        <li>Praesent dignissim dui eget tristique egestas.</li>
+        <li>Duis suscipit ipsum vel lacinia scelerisque.      </li>
+    </div>
+    <div id="user-homepage-active-traids">
+      <% @traids.each_with_index do |traid, index| %>
+        <div class="user-homepage-traid-snippet">
+          <br>
+          <div>
+            <h4>Current offer:</h4>
+            <p><%= traid.offer %></p>
+          </div>
+          <br>
+          <div>
+            <h6>Traid Sent:</h6>
+            <p><%= traid.updated_at.to_date %></p>
+          </div>
+          <br>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

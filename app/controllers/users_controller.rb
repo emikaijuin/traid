@@ -4,6 +4,8 @@ class UsersController < ApplicationController
   before_action :validate_user, only: [:edit, :update, :destroy]
 
   def index
+    @user = current_user
+    @traids = Traid.where(user_id: @user.id)
   end
 
   def show
