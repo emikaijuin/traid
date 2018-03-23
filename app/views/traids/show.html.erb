@@ -17,6 +17,33 @@
             <%= render "traids/traid_information", traid: @requested_user_traid %>
           </div>
         </div>
+        
+        <!--View Previous Traid Versions-->
+        <div>
+          <h4>See previous versions of traid offer:</h4>
+          <ul>
+            <% @traid_logs.history.each do |date, user_traid| %>
+              <li>
+                <div class="columns">
+                  <div class="column">
+                    <p><%= date.to_date.to_s %></p>
+                    <div class="columns">
+                      
+                      <% user_traid.each do |user_id, traid_log| %>
+                        <div class="column">
+                          <%= render "traid_logs/traid_log_information", traid_log: traid_log %>
+                        </div>
+                      <% end %>
+                      
+                    </div>
+                  </div>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+        <!-- End Previous Traid Versions-->
+        
     </div>
   </div>
 

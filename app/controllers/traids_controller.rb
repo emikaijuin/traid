@@ -15,6 +15,7 @@ class TraidsController < ApplicationController
       @current_user_traid = traid if traid.user_id == current_user.id
       @requested_user_traid = traid if traid.user_id != current_user.id
     end
+    @traid_logs = TraidLog.find_by(key: @traid.key)
   end
 
   def new
