@@ -1,38 +1,55 @@
-
-<%= form_for(@traid) do |f| %>
-  <% if @traid.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@traid.errors.count, "error") %> prohibited this traid from being saved:</h2>
-
-      <ul>
-      <% @traid.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+<div class="columns">
+  <div class="column">
+    <%= form_for(@traid) do |f| %>
+      <% if @traid.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@traid.errors.count, "error") %> prohibited this traid from being saved:</h2>
+    
+          <ul>
+          <% @traid.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.label :title %>
-    <%= f.text_field :title %>
     
-    <%= f.label :conditions %>
-    <%= f.text_area :conditions %>
-    
-    <%= f.label :offer %>
-    <%= f.text_field :offer %>
-    
-    <%= f.label :offer_type %>
-    <%= f.select :offer_type, options_for_select(Traid.offer_types)%>
-
-    <%= f.label :offer_subtype %>
-    <%= f.select :offer_subtype, options_for_select(Traid.offer_subtypes)%>
-    
-    <%= f.label :quantity %>
-    <%= f.text_field :quantity %>
-    
-    <%= hidden_field_tag(:traid_user_id, params[:traid_user_id]) %>
-    
-    <%= f.submit %>
+      <div class="actions">
+        <div>
+          <%= f.label :title %>
+          <%= f.text_field :title %>
+        </div>
+        <br>  
+        <div>
+          <%= f.label :conditions %>
+          <%= f.text_area :conditions, cols: "60", rows: "10" %>
+        </div>
+        <br>
+        <div>
+          <%= f.label :offer %>
+          <%= f.text_field :offer %>
+        </div>
+        <br>
+        <div>
+          <%= f.label :offer_type %>
+          <%= f.select :offer_type, options_for_select(Traid.offer_types)%>
+        </div>
+        <br>
+        <div>
+          <%= f.label :offer_subtype %>
+          <%= f.select :offer_subtype, options_for_select(Traid.offer_subtypes)%>
+        </div>
+        <br>
+        <div>
+          <%= f.label :quantity %>
+          <%= f.text_field :quantity %>
+        </div>
+        <br>
+        <%= hidden_field_tag(:traid_user_id, params[:traid_user_id]) %>
+        
+        <div>
+          <%= f.submit "Offer Traid", :class => "button is-outlined", :style => "color: rgb(108,100,139)" %>
+        </div>
+      </div>
+    <% end %>
   </div>
-<% end %>
+</div>
