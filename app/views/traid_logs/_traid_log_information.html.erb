@@ -1,0 +1,33 @@
+<div>
+    <div>
+      <h4>Offer: </h4>
+      <p> 
+        <% if traid_log["status"] != "nil" %>
+          <%= traid_log["offer"] %>
+        <% else %>
+          Pending...
+        <% end %>
+      </p>
+    </div>
+    <br>
+    <div>
+      <h4>Conditions:</h4>
+      <p>
+        <% if traid_log["status"] != "nil" %>
+          <%= traid_log["conditions"] %>
+        <% else %>
+          Pending...
+        <% end %>
+      </p>
+    </div>
+    <br>
+    <div>
+      <h4>Quantity</h4>
+      <% if traid_log["status"] != "nil" %>
+        <%= traid_log["quantity"] %>
+      <% else %>
+        Pending...
+      <% end %>
+    </div>
+    <br>
+</div>
