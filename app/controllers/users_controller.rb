@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :require_login, except: [:new, :create]
-  before_action :validate_user, only: [:index, :edit, :update, :destroy]
+  before_action :validate_user, only: [:edit, :update, :destroy]
 
   def index
   end
