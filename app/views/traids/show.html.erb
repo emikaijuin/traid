@@ -1,19 +1,24 @@
 <p id="notice"><%= notice %></p>
 
 <div>
-  <div>
-    <h2>Status: <%= Traid.status(@current_user_traid.status, @requested_user_traid.status) %></h2>
+  <div class="columns" id="traid-show-container" style="background-color: rgba(107,186,167,0.5);">
+    <div class="column">
+      <h2 style="display: inline-block;">Status: <%= Traid.status(@current_user_traid.status, @requested_user_traid.status) %></h2>
+      <span>Reference key: <%=@traid.key%></span>
+       <div class="columns">
+          <div id = "current-user-traid-copy" class="column" style="border: 1px solid gainsboro">
+            <h3>My Traid Terms</h3>
+            <%= render "traids/traid_information", traid: @current_user_traid %>
+            <%= link_to 'Negotiate Traid', edit_traid_path(@traid) %> 
+          </div>
+          
+          <div id = "requested-user-traid-copy" class="column" style="border: 1px solid gainsboro">
+            <h3><%=@requested_user_traid.user.username%>'s Traid Terms</h3>
+            <%= render "traids/traid_information", traid: @requested_user_traid %>
+          </div>
+        </div>
+    </div>
   </div>
-  
-  <div id = "current-user-traid-copy">
-    <h3>My Traid Terms</h3>
-    <%= render "traids/traid_information", traid: @current_user_traid %>
-    <%= link_to 'Negotiate Traid', edit_traid_path(@traid) %> 
-  </div>
-  
-  <div id = "requested-user-traid-copy">
-    <h3><%=@requested_user_traid.user.username%>'s Traid Terms</h3>
-    <%= render "traids/traid_information", traid: @requested_user_traid %>
-  </div>
+
 
 </div>

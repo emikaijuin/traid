@@ -33,6 +33,8 @@ gem 'pg_search'
 
 gem 'faker'
 
+gem 'bulma-rails', "~> 0.6.2"
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

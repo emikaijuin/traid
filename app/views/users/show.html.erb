@@ -1,18 +1,31 @@
-<%= flash[:notice] %>
-<h2><%= @user.username %></h2>
-<%= @user.city %>
-
-<h4>Is offering:</h4>
-<% @user.is_seeking.each do |s| %>
-  <%= s %>
-<% end %>
-
-<h4>Is seeking:</h4>
-<%= @user.is_offering.each do |o| %>
-  <%= o %>
-<% end %>
-
-<%= form_for(:traid, url: new_traid_path, :method => :get) do |f| %>
-  <%= hidden_field_tag(:traid_user_id, params[:id]) %> 
-<%= f.submit "Traid with #{@user.username}!" %>
-<% end %>
+<div class="columns" id="user-show-container">
+  <div class="column">
+    <h2><%= @user.username %></h2>
+    <div>
+      <span>Community: <%= @user.city %></span>
+    </div>
+    <br>
+    <div>
+      <h4>Is offering:</h4>
+      <ul>
+        <% @user.is_seeking.each do |i| %>
+          <li><%= i %></li>
+        <% end %>
+      </ul>
+    </div>
+    <br>
+    <div>
+      <h4>Is seeking:</h4>
+      <ul>
+        <%= @user.is_offering.each do |i| %>
+          <li><%= i %></li>
+        <% end %>
+      </ul>
+    </div>
+    <br>
+    <%= form_for(:traid, url: new_traid_path, :method => :get) do |f| %>
+      <%= hidden_field_tag(:traid_user_id, params[:id]) %> 
+    <%= f.submit "Traid with #{@user.username}!", :class => "button is-outlined", :style => "color: rgb(108,100,139);" %>
+    <% end %>
+  </div>
+</div>

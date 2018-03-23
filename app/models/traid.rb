@@ -3,8 +3,7 @@ class Traid < ApplicationRecord
   # Associations
   belongs_to :user
   before_save :create_key
-  
-  
+
   enum status: [ :requested, :negotiating, :canceled, :finalized ]
   
   def create_key
@@ -14,23 +13,24 @@ class Traid < ApplicationRecord
   class << self
     
     def status(status_1, status_2)
-      if status_1 == "requested" || status_2 == "requested"
-        return "Requested"
+      if status_1 == "negotiating" || status_2 == "negotiating"
+        status = "Negotiating"      
+      elsif status_1 == "requested" || status_2 == "requested"
+        status = "Requested"
       elsif status_1 == nil || status_2 == nil
-        return "Requested"
-      elsif status_1 == "negotiating" || status_2 == "negotiating"
-        return "Negotiating"
+        status = "Requested"
       elsif ( status_1 == "finalized" && status_2 != "finalized" ) || (status_1 != "finalized" && status_2 == "finalized")
-        return "Traid Finalization Pending Approval"
+        status = "Traid Finalization Pending Approval"
       elsif status_1 == "canceled" || status_2 == "canceled"
-        return "Canceled"
+        status = "Canceled"
       elsif status_1 == "finalized" && status_2 == "finalized"
-        return "Traid Finalized"
+        status = "Traid Finalized"
       end
+      return status
     end
     
-    def create_copy(user_id, key)
-      @traid_copy = Traid.new
+    def create_copy(user_id, key, traid_params)
+      @traid_copy = Traid.new(traid_params)
       @traid_copy.user = User.find(user_id)
       @traid_copy.key = key
       @traid_copy

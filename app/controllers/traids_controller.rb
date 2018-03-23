@@ -26,12 +26,13 @@ class TraidsController < ApplicationController
 
   def create
     @traid_1 = current_user.traids.new(traid_params)
-    @trade_1.status = "Requested"
-    @traid_2 = Traid.create_copy(params[:traid_user_id], @traid_1.key) if @traid_1.save
+    @traid_1.status = "requested"
+    @traid_2 = Traid.create_copy(params[:traid_user_id], @traid_1.key, traid_params) if @traid_1.save
 
 
     respond_to do |format|
       if @traid_2.save
+        TraidLog.add_traid_to_log(@traid_2.key)
         format.html { redirect_to @traid_1, notice: "Traid was sent to #{@user_2} (ID: #{@traid_1.key})" }
         format.json { render :show, status: :created, location: @traid }
       else
@@ -42,8 +43,10 @@ class TraidsController < ApplicationController
   end
 
   def update
+    
     respond_to do |format|
-      if @traid.update(traid_params)
+      if @traid.update(traid_params) && @traid.negotiating!
+        TraidLog.add_traid_to_log(@traid.key)
         format.html { redirect_to @traid, notice: 'Traid was successfully updated.' }
         format.json { render :show, status: :ok, location: @traid }
       else
