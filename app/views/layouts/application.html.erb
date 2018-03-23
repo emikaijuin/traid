@@ -5,57 +5,80 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <link 
+    href="https://fonts.googleapis.com/css?family=Raleway:200,400,700,800" 
+    rel="stylesheet">
+  <script
+    src="https://code.jquery.com/jquery-3.3.1.js"
+    integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    crossorigin="anonymous"></script>
+  <script 
+    defer 
+    src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 </head>
 <body>
-  <!--Facebook Login-->
-  <script>
-    window.fbAsyncInit = function() {
-      FB.init({
-        appId      : '{your-app-id}',
-        cookie     : true,
-        xfbml      : true,
-        version    : '{latest-api-version}'
-      });
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    
+    <div class="navbar-brand">
+      <a class="navbar-item" href="/"><i class="fab fa-pagelines fa-lg" style="color: green;"></i></a>
+      <div class="navbar-burger">
+        <span>
+          <% if logged_in? %>
+            <%= link_to "View Profile", "/users/#{current_user.id}" %>
+          <% end %>
+        </span>
+        <span>
+          <% if logged_in? -%>
+            <%= button_to t(".sign_out"), sign_out_path, method: :delete %>
+          <% else -%>
+            <%= link_to t(".sign_in"), sign_in_path %>
+          <% end -%>
+        </span>
+        <span></span>
+      </div>
+    </div>
+    
+    <div class="navbar-menu">
+      <div class="navbar-start">
+        <div class="navbar-item" id="search-form">
+          <div class="field has-addons">
+          
+            <%= form_tag search_index_path, :method => :get  do %>
+              <div class="control has-icons-right">
+                <%= text_field_tag 'search', nil, placeholder: 'Search for offers', class: 'input', list: "list" %>
+                <datalist id="list"></datalist>
+                <span class="icon is-small is-right">
+                  <i class="fas fa-search fa-lg"></i>
+                </span>
+              </div>
+            <% end %>
+            
+          </div>
+        </div>
+      </div>
+      
+      <div class="navbar-end">
         
-      FB.AppEvents.logPageView();   
+        <div class="navbar-item" id="profile">
+          <% if logged_in? %>
+            <%= link_to "View Profile", "/users/#{current_user.id}" %>
+          <% end %>
+        </div>
         
-    };
-  
-    (function(d, s, id){
-       var js, fjs = d.getElementsByTagName(s)[0];
-       if (d.getElementById(id)) {return;}
-       js = d.createElement(s); js.id = id;
-       js.src = "https://connect.facebook.net/en_US/sdk.js";
-       fjs.parentNode.insertBefore(js, fjs);
-     }(document, 'script', 'facebook-jssdk'));
-  </script>
-  <!-- / Facebook Login-->
-
-  <%= current_user %>
-  <% if logged_in? %>
-    <%= link_to "Log out", sign_out_path, method: :delete %>
-  <% else %>
-    <%= link_to "Sign in", sign_in_path %>
-    <%= link_to "Sign in with Facebook", "/auth/facebook" %>
-    <!--FACEBOOK SDK-->
-    <div id="fb-root"></div>
-    <script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&autoLogAppEvents=1&version=v2.12&appId=1040839342723303';
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-    </script>
-    <!--FACEBOOK SDK-->
-  <% end %>
-  
-  <%= form_tag search_index_path, :method => :get  do %>
-    <%= text_field_tag 'search', nil, class: 'input', list: "list" %>
-    <datalist id="list"></datalist>
-  <% end %>
-
-<%= yield %>
+        <div class="navbar-item" id="sign-out-button">
+          <% if logged_in? -%>
+            <%= link_to t(".sign_out"), sign_out_path, method: :delete %>
+          <% else -%>
+            <%= link_to t(".sign_in"), sign_in_path %>
+          <% end -%>
+        </div>
+        
+      </div>
+  </div>
+</nav>
+<div class="content">
+  <%= yield %>
+</div>
 
 </body>
 </html>
