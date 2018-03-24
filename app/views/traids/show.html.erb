@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <div>
-  <div class="columns" id="traid-show-container" style="background-color: rgba(107,186,167,0.5);">
+  <div class="columns" id="traid-show-container">
     <div class="column">
       <h2 style="display: inline-block;">Status: <%= Traid.status(@current_user_traid.status, @requested_user_traid.status) %></h2>
       <span>Reference key: <%=@traid.key%></span>
@@ -9,12 +9,19 @@
           <div id = "current-user-traid-copy" class="column" style="border: 1px solid gainsboro">
             <h3>My Traid Terms</h3>
             <%= render "traids/traid_information", traid: @current_user_traid %>
-            <%= link_to 'Negotiate Traid', edit_traid_path(@traid) %> 
+            <br>
+            <button class="button is-outlined"><%= link_to 'Negotiate Traid', edit_traid_path(@traid) %></button>
           </div>
           
           <div id = "requested-user-traid-copy" class="column" style="border: 1px solid gainsboro">
             <h3><%=@requested_user_traid.user.username%>'s Traid Terms</h3>
             <%= render "traids/traid_information", traid: @requested_user_traid %>
+            <br>
+            <%= form_for(:traids, :url => accept_traid_path) do |f| %>
+              <%= hidden_field_tag(:accepted_traid_id, @requested_user_traid.id) %>
+              <%= hidden_field_tag(:accepter_traid_id, @current_user_traid.id) %>
+              <%= f.submit "Accept Traid", :class => "button is-outlined" %>
+            <% end %>
           </div>
         </div>
         
