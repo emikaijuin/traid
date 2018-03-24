@@ -1,0 +1,25 @@
+<div class="columns user-reviews">
+  <div class="column">
+    
+    <div class="rating-container level">
+      <span class="level-left" style="padding-left: 1%;">
+        <% review.calculate_whole_stars.times do %>
+          <i class="fas fa-star"></i>
+        <% end %>
+        <% review.calculate_half_stars.times do %>
+          <i class="fas fa-star-half"></i>
+        <% end %>
+      </span>
+      
+      <span class="level-right" style="padding-right: 5%">
+        <%= User.find(review.reviewing_user_id).username %>
+      </span>
+    </div>
+
+    
+    <div class="review-container">
+      <%= review.text %>
+    </div>
+    
+  </div>
+</div>
