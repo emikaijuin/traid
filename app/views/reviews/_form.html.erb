@@ -1,0 +1,39 @@
+<div class="columns">
+  <div class="column">
+  
+    <div class="field">
+      Which Traid are you reviewing? (Please note you can only review your Traid once).
+      <% available_traids = Traid.unreviewed_traids(user, current_user) %>
+      <div class="control">
+        <%= f.select :traid_key, options_for_select(available_traids), :class => "select" %>
+      </div>
+    </div>
+    
+    <div class="field">
+      <div class="control">
+        <%= f.label :rating %>
+      </div>
+      
+      <div>
+        <%= f.text_field :rating %>
+      </div>  
+    </div>
+    
+    <div class="field">
+      <div class="control">
+        <%= f.label :text %>
+      </div>
+      
+      <div>
+        <%= f.text_area :text, :class => "textarea" %>
+      </div>
+    </div>
+    
+    <div class="field">
+      <div class="control">
+        <%= f.submit "Submit Review", :class => "button is-outlined" %>
+      </div>
+    </div>
+    
+  </div>
+</div>  
