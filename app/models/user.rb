@@ -12,6 +12,8 @@ class User < ApplicationRecord
   has_secure_password
   attr_accessor :remember_token
   has_many :traids
+  has_many :reviews
+  has_many :ratings
   
 
   validates :email, 
@@ -23,6 +25,40 @@ class User < ApplicationRecord
     presence: true
   validates :last_name, 
     presence: true
+  
+  # Model Methods
+  
+  def rating
+    rating = 0
+    count = 0
+    self.reviews.each do |review|
+      if review.rating # In case user only submitted review
+        rating += review.rating.to_i
+        count += 1
+      end
+    end
+    rating / count
+  end
+    
+  def is_reviewable_by?(user)
+    traid_info = Traid.has_happened_between_users(self, user) # self => user from show page being reviewed
+    if traid_info["is_true?"]
+      if User.has_available_traid_review?(user, traid_info["key"])
+        return true
+      else
+        return false
+      end
+    else
+      return false
+    end
+  end
+  
+  def self.has_available_traid_review?(reviewing_user, key)
+    Traid.all.where(key: key).each do |traid|
+      return true if traid.user_id == reviewing_user.id && traid.is_reviewable_by_user
+    end
+    return false
+  end
   
   # Secure sessions methods 
   
