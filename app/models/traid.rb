@@ -12,6 +12,23 @@ class Traid < ApplicationRecord
   
   class << self
     
+    def unreviewed_traids(user_being_reviewed, user_reviewing)
+      unreviewed_traids = []
+      Traid.where(user_id: user_reviewing.id).each do |traid|
+        if !user_being_reviewed.traids.where(key: traid.key).empty? && traid.is_reviewable_by_user
+          unreviewed_traids << [traid.title, traid.key]
+        end
+      end
+      return unreviewed_traids
+    end
+    
+    def has_happened_between_users(user_being_reviewed, user_reviewing)
+      user_reviewing.traids.each do |traid|
+        return {"is_true?" => true, "key" => traid.key} if !user_being_reviewed.traids.where(key: traid.key).empty?
+      end
+      return {"is_true?" => false}
+    end
+    
     def status(status_1, status_2)
       if status_1 == "negotiating" || status_2 == "negotiating"
         status = "Negotiating"      
