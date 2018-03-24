@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   resources :traid_logs
   resources :traids
+  post 'traids/accept' => "traids#accept", as: "accept_traid"
   get 'welcome/index'
 
   # Sessions paths
@@ -19,7 +20,10 @@ Rails.application.routes.draw do
   root :to => "welcome#index"
   
   # Resources
-  resources :users
+  resources :users do
+    resources :reviews, only: [:new, :create, :destroy]
+  end
+  
   resources :search, only: [:index]
   post "/search" => "search#search"
   

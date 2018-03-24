@@ -1,31 +1,98 @@
 <div class="columns" id="user-show-container">
   <div class="column">
-    <h2><%= @user.username %></h2>
-    <div>
-      <span>Community: <%= @user.city %></span>
+    
+    <div class="level" id="user-show-header">
+      <div class="level-left">
+        <div><h1><%= @user.username %></h1></div>
+      </div>
+      
+      <div class="level-right" id="user-show-header-traid-level">
+        <div><%= @user.rating %>  <i class="fas fa-star">   </i></div>
+        <div>
+          <%= form_for(:traid, url: new_traid_path, :method => :get) do |f| %>
+            <%= hidden_field_tag(:traid_user_id, params[:id]) %> 
+            <%= f.submit "Traid with #{@user.username}!", :class => "button is-primary is-outlined" %>
+          <% end %>
+        </div>
+        <div>
+          <span><%= @user.traids.count %><%= @user.traids.count > 1 ? " TRAIDS" : " TRAID" %> </span>
+        </div> 
+      </div>
+      
     </div>
-    <br>
-    <div>
-      <h4>Is offering:</h4>
-      <ul>
-        <% @user.is_seeking.each do |i| %>
-          <li><%= i %></li>
-        <% end %>
-      </ul>
-    </div>
-    <br>
-    <div>
-      <h4>Is seeking:</h4>
-      <ul>
-        <% @user.is_offering.each do |i| %>
-          <li><%= i %></li>
-        <% end %>
-      </ul>
-    </div>
-    <br>
-    <%= form_for(:traid, url: new_traid_path, :method => :get) do |f| %>
-      <%= hidden_field_tag(:traid_user_id, params[:id]) %> 
-    <%= f.submit "Traid with #{@user.username}!", :class => "button is-outlined", :style => "color: rgb(108,100,139);" %>
-    <% end %>
+    
+    <hr>
+    
+    <div class="columns is-one-third">
+      <div class="column">
+        
+        <div class="columns" id="user-show-info-container">
+          <div class="column">
+            <div>
+              <span>Community: <%= @user.city %></span>
+            </div>
+            <br>
+            <div>
+              <h4>Is offering:</h4>
+              <ul>
+                <% @user.is_seeking.each do |i| %>
+                  <li><%= i %></li>
+                <% end %>
+              </ul>
+            </div>
+            <br>
+            <div>
+              <h4>Is seeking:</h4>
+              <ul>
+                <% @user.is_offering.each do |i| %>
+                  <li><%= i %></li>
+                <% end %>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+        
+        
+        <div class="columns" id="user-show-reviews-container">
+          <div class="column">
+            <h3>User Reviews</h3>
+            <%= flash[:review] %>
+            <% if logged_in? %>
+              <% if @user.is_reviewable_by?(current_user)  && current_user != User.find(params[:id]) %>
+                <p>
+                  Have you reviewed your Traid with <%=@user.username%> yet?
+                  <a class="toggle-review-form"><i class="fas fa-plus"></i> Review</a>
+                </p>
+              
+              <div id="hidden-review-form">
+                <span class="toggle-review-form"><i class="fas fa-times" id="close-review-form" ></i></span>
+                <%= form_for [@user, @review] do |f| %>
+                  <%= render "reviews/form", f: f, user: @user %>
+                <% end %>
+              </div>
+              <% end %>
+              
+              <% if !@user.reviews.empty? %>
+                <% @user.reviews.each do |review| %>
+                  <%= render "users/reviews", review: review %>
+                <% end %>
+              <% else %>
+                <div>
+                  This user hasn't been reviewed yet.
+                </div>
+              <% end %>
+            <% end %>
+          </div>  
+          
+        </div>
+      </div>
+    
+      <div class="column is-one-third" id="user-show-additional-info">
+        A BUNCH OF PICTURES AND THINGS WILL GO HERE NOT SURE YETS
+      </div>        
+
+  
+   </div>
   </div>
 </div>

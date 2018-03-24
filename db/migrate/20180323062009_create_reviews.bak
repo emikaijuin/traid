@@ -1,0 +1,11 @@
+class CreateReviews < ActiveRecord::Migration
+  def change
+    create_table :reviews do |t|
+      t.string :traid_key
+      t.references :users
+      t.integer :reviewed_user_id
+      t.integer :value
+      t.timestamps null: false
+    end
+  end
+end

@@ -64,6 +64,26 @@ class TraidsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def accept
+    @accepted_traid = Traid.find(params[:accepted_traid_id])
+    @accepter_traid = Traid.find(params[:accepter_traid_id])
+    
+    @accepter_traid.conditions = @accepted_traid.conditions
+    
+    [@accepted_traid, @accepter_traid].each do |traid|
+      traid.is_reviewable_by_user = true
+      traid.finalized!
+    end
+    
+    if @accepted_traid.save && @accepter_traid.save
+      redirect_to traid_path(@accepter_traid)
+    else
+      flash[:notice] = "There was a problem, please try again."
+      redirect_to traid_path(@accepter_traid)
+    end
+    
+  end
 
   private
     def set_traid
