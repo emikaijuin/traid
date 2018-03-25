@@ -31,13 +31,17 @@ class User < ApplicationRecord
   def rating
     rating = 0
     count = 0
-    self.reviews.each do |review|
-      if review.rating # In case user only submitted review
-        rating += review.rating.to_i
-        count += 1
+    if !self.reviews.empty?
+      self.reviews.each do |review|
+        if review.rating # In case user only submitted review
+          rating += review.rating.to_i
+          count += 1
+        end
       end
+      return rating / count
+    else
+      return 0
     end
-    rating / count
   end
     
   def is_reviewable_by?(user)
@@ -58,6 +62,23 @@ class User < ApplicationRecord
       return true if traid.user_id == reviewing_user.id && traid.is_reviewable_by_user
     end
     return false
+  end
+  
+  # Google Login methods
+  
+  def self.from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|
+      user.provider = auth.provider
+      user.uid = auth.uid
+      user.username = auth.info.name
+      user.first_name = auth.info.first_name
+      user.last_name = auth.info.last_name
+      user.email= auth.info.email
+      user.oauth_token = auth.credentials.token
+      user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+      user.password = SecureRandom.hex(8)
+      user.save!
+    end
   end
   
   # Secure sessions methods 
