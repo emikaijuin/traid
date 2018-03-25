@@ -15,6 +15,11 @@ Rails.application.routes.draw do
   get "/sign_up" => "users#new", as: "sign_up"
   get "/auth/:provider/callback" => "sessions#create_from_omniauth"
   
+  # Google Login Paths - Not sure if this is required?
+  get 'auth/:provider/callback', to: 'sessions#create'
+  get 'auth/failure', to: redirect('/')
+  get 'signout', to: 'sessions#destroy', as: 'signout'
+  
   # Welcome page
   get "/" => "welcome#index"
   root :to => "welcome#index"
