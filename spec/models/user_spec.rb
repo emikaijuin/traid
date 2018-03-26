@@ -3,12 +3,6 @@ require 'rspec'
 require 'rspec-given'
 
 describe User do
-# 	let(:first_name) {'Harold'}
-# 	let(:last_name) {'Houdini'}
-# 	let(:username) {'harold_the_houdini'}
-# 	let(:email) {'haroldhoudini@gmail.com'}
-# 	let(:password) {SecureRandom.hex(6)}
-# 	let(:key) {SecureRandom.hex(4)}
 
 	Given (:harold) { User.new(first_name: 'Harold', last_name: 'Houdini', email: 'harold_the_houdini@gmail.com', username: 'harold_houdini', password: 'password') }
 	Given (:mathilda) { User.new(first_name: 'Mathilda', last_name: 'Roulen', email: 'mathilda_roulen@gmail.com', username: 'mathilda_roulen', password: 'password') }
