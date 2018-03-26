@@ -68,3 +68,17 @@
     width: 60%;
     margin: auto;
 }
+.user-homepage-traid-snippet {
+    background-color: rgba(255, 165, 0, 0.1);
+    margin: 1em 0;
+    padding: 1em;
+    position: relative;
+}
+.user-homepage-traid-date > h6, .user-homepage-traid-date > p {
+    display: inline-block;
+}
+.user-homepage-traid-link {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+}
