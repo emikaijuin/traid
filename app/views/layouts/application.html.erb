@@ -2,9 +2,7 @@
 <html>
 <head>
   <title>Workspace</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
+
   <link 
     href="https://fonts.googleapis.com/css?family=Raleway:200,400,700,800" 
     rel="stylesheet">
@@ -15,9 +13,17 @@
   <script 
     defer 
     src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+   <script 
+    async 
+    defer 
+    src="https://maps.googleapis.com/maps/api/js?key=<%= ENV["GOOGLE_MAPS_KEY"]%>&callback=initMap"
+    type="text/javascript">
+   </script>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
 </head>
 <body>
-  <div style="position: relative; bottom: 0; height: 33%; background-color: rgba(107,186,167,0.3); z-index: -5;"></div>
     <nav class="navbar" role="navigation" aria-label="main navigation">
       
       <div class="navbar-brand">
