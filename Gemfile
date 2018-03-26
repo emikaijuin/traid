@@ -50,6 +50,16 @@ gem 'omniauth-google-oauth2'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  gem 'guard'
+  gem 'guard-rspec'
+  gem 'guard-puma'
+  gem 'rspec'
+  gem 'rspec-rails'
+  gem 'rspec-given'
+  gem 'shoulda-matchers'
+  gem 'factory_bot_rails'
+  gem 'shoulda-callback-matchers'
+  gem 'rails-controller-testing'
 end
 
 group :development do
