@@ -1,6 +1,7 @@
 <div class="columns">
   <div class="column">
-    <%= form_for(@traid) do |f| %>
+    <h3>Make An Offer</h3>
+    <%= form_for @traid, :remote => true, :id => "traid-form" do |f| %>
       <% if @traid.errors.any? %>
         <div id="error_explanation">
           <h2><%= pluralize(@traid.errors.count, "error") %> prohibited this traid from being saved:</h2>
@@ -15,36 +16,36 @@
     
       <div class="actions">
         <div>
-          <%= f.label :title %>
-          <%= f.text_field :title %>
+          <p><%= f.label :title %></p>
+          <p><%= f.text_field :title %></p>
         </div>
         <br>  
         <div>
-          <%= f.label :conditions %>
-          <%= f.text_area :conditions, cols: "60", rows: "10" %>
+          <p><%= f.label :conditions %></p>
+          <p><%= f.text_area :conditions, cols: "60", rows: "10" %></p>
         </div>
         <br>
         <div>
-          <%= f.label :offer %>
-          <%= f.text_field :offer %>
+          <p><%= f.label :offer %></p>
+          <p><%= f.text_field :offer %></p>
         </div>
         <br>
         <div>
-          <%= f.label :offer_type %>
-          <%= f.select :offer_type, options_for_select(Traid.offer_types)%>
+          <p><%= f.label :offer_type %></p>
+          <p><%= f.select :offer_type, options_for_select(Traid.offer_types)%></p>
         </div>
         <br>
         <div>
-          <%= f.label :offer_subtype %>
-          <%= f.select :offer_subtype, options_for_select(Traid.offer_subtypes)%>
+          <p><%= f.label :offer_subtype %></p>
+          <p><%= f.select :offer_subtype, options_for_select(Traid.offer_subtypes)%></p>
         </div>
         <br>
         <div>
-          <%= f.label :quantity %>
-          <%= f.text_field :quantity %>
+          <p><%= f.label :quantity %></p>
+          <p><%= f.text_field :quantity %></p>
         </div>
         <br>
-        <%= hidden_field_tag(:traid_user_id, params[:traid_user_id]) %>
+        <%= hidden_field_tag(:traid_user_id, params[:id]) %>
         
         <div>
           <%= f.submit "Offer Traid", :class => "button is-outlined", :style => "color: rgb(108,100,139)" %>
