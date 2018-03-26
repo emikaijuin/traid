@@ -28,6 +28,15 @@
     margin: 2.5%;
     // border: 1px solid rgb(230,207,139);
 }
+#user-show-traid-form {
+    display: none;
+    position: relative;
+}
+#close-traid-form {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
 .user-reviews{
     width: 96%;
     margin: 2% auto !important;

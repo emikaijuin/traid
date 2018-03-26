@@ -9,10 +9,11 @@
       <div class="level-right" id="user-show-header-traid-level">
         <div><%= @user.rating %>  <i class="fas fa-star">   </i></div>
         <div>
-          <%= form_for(:traid, url: new_traid_path, :method => :get) do |f| %>
-            <%= hidden_field_tag(:traid_user_id, params[:id]) %> 
-            <%= f.submit "Traid with #{@user.username}!", :class => "button is-primary is-outlined" %>
-          <% end %>
+          <%#= form_for(:traid, url: new_traid_path, :method => :get) do |f| %>
+            <%#= hidden_field_tag(:traid_user_id, params[:id]) %> 
+            <%#= f.submit "Traid with #{@user.username}!", :class => "button is-primary is-outlined" %>
+          <%# end %>
+          <button class="button is-primary is-outlined" id="toggle-traid-form"> Traid with <%=@user.username%>!</button>
         </div>
         <div>
           <span><%= @user.traids.count %><%= @user.traids.count == 1 ? " TRAIDS" : " TRAID" %> </span>
@@ -91,7 +92,11 @@
       <div class="column is-one-third" id="user-show-additional-info">
         A BUNCH OF PICTURES AND THINGS WILL GO HERE NOT SURE YETS
       </div>        
-
+    
+      <div class="column is-one-third" id="user-show-traid-form">
+        <%= render "traids/form", traid: @traid %>
+        <span id="close-traid-form"><i class="fas fa-times"></i></span>
+      </div>        
   
    </div>
   </div>
