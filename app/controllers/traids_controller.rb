@@ -35,7 +35,8 @@ class TraidsController < ApplicationController
       if @traid_2.save
         TraidLog.add_traid_to_log(@traid_2.key)
         format.html { redirect_to @traid_1, notice: "Traid was sent to #{@user_2} (ID: #{@traid_1.key})" }
-        format.json { render :show, status: :created, location: @traid }
+        # format.json { render :show, status: :created, location: @traid }
+        format.js 
       else
         format.html { render :new }
         format.json { render json: @traid.errors, status: :unprocessable_entity }
