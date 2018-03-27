@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   resources :users do
     resources :reviews, only: [:new, :create, :destroy]
   end
+  get "/users/recent_user_addresses" => "users#recent_user_addresses", as: "recent_user_addresses_path"
   
   resources :search, only: [:index]
   post "/search" => "search#search"
