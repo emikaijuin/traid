@@ -72,7 +72,7 @@ class UsersController < ApplicationController
     def user_params
       # is_seeking = params[:user][:is_seeking].split(",")
       # is_offering = params[:user][:is_offering].split(",")
-      params.require(:user).permit(:first_name, :last_name, :username, :birthday, :email, :phone_number, :password, :password_confirmation, :address, :secondary_address, :city, :state, :country, :is_offering, :is_seeking)
+      params.require(:user).permit(:first_name, :last_name, :username, :birthday, :email, :phone_number, :password, :password_confirmation, :address, :secondary_address, :city, :state, :zip_code, :country, :is_offering, :is_seeking)
     end
     
     def require_login
