@@ -86,10 +86,8 @@
       <h3>Finalized Traids</h3>
       <% if !@finalized_traids.empty? %>
         <% @finalized_traids.each_with_index do |traid, index| %>
-          <% unless traid.finalized? || traid.canceled? %>
-           <%= render "users/traid_link", traid: traid, index: index %>
+           <%= render "users/traid_link_finalized", traid: traid, index: index %>
            <hr>
-         <% end %>
         <% end %>
       <% else %>
         <div>
