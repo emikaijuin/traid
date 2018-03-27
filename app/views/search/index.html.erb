@@ -1,4 +1,16 @@
+<div class="level">
+  <div id="filter-container" class="level-left">
+    <%= form_for(:search, url: search_index_path) do |f|%>
+      Filter by max drive time (minutes):
+      <%= f.text_field :search, :id => "max-distance" %>
+      <%= f.submit "Filter", :id => "submit-distance-filter", :class => "button is-outlined is-primary" %>
+    <% end %>
+  </div>
+</div>  
+  <br><br>
+  
 <div id="search-index-container">
+
   <% if !@results.empty? %>
     <% @results.each do |result| %>
       <%= render '/search/result', user: User.find(result[:searchable_id])%>
