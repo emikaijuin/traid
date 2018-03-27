@@ -10,8 +10,11 @@
             <h3>My Traid Terms</h3>
             <%= render "traids/traid_information", traid: @current_user_traid %>
             <br>
-            <% unless @traid.finalized? %>
-              <button class="button is-outlined"><%= link_to 'Negotiate Traid', edit_traid_path(@traid) %></button>
+            <% unless @traid.finalized? || @traid.canceled? %>
+              <%= form_for(:traids, :url => edit_traid_path(@traid), :method => :get) do |f| %>
+                <%= hidden_field_tag(:requested_user_id, @requested_user_traid.user_id )%>
+                <%= f.submit :negotiate_traid, :class => "button is-outlined" %>
+              <% end %>
             <% end %>
           </div>
           
@@ -19,12 +22,20 @@
             <h3><%= link_to "#{@requested_user_traid.user.username}'s", user_path(@requested_user_traid.user) %> Traid Terms</h3>
             <%= render "traids/traid_information", traid: @requested_user_traid %>
             <br>
-            <% unless @traid.finalized? %>
-              <%= form_for(:traids, :url => accept_traid_path) do |f| %>
+            <% unless @traid.finalized? || @traid.canceled? %>
+            
+              <%= form_for(:traids, :url => accept_traid_path,:html => { :class => "inline"}) do |f| %>
                 <%= hidden_field_tag(:accepted_traid_id, @requested_user_traid.id) %>
                 <%= hidden_field_tag(:accepter_traid_id, @current_user_traid.id) %>
-              <%= f.submit "Accept Traid", :class => "button is-outlined" %>
-            <% end %>
+                <%= f.submit "Accept Traid", :class => "button is-primary inline" %>
+              <% end %>
+              
+              <%= form_for(:traids, :url => cancel_traid_path, :html => {:class => "inline" }) do |f| %>
+                <%= hidden_field_tag(:canceled_traid_id, @requested_user_traid.id) %>
+                <%= hidden_field_tag(:canceler_traid_id, @current_user_traid.id) %>
+                <%= f.submit "Cancel Traid", :class => "button is-outlined is-danger inline"%>
+              <% end %>
+              
             <% end %>
           </div>
         </div>
