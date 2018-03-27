@@ -26,6 +26,9 @@ class User < ApplicationRecord
   validates :last_name, 
     presence: true
   
+  # serialize :is_offering, Array
+  # serialize :is_seeking, Array
+  
   # Model Methods
   
   def rating
@@ -34,11 +37,11 @@ class User < ApplicationRecord
     if !self.reviews.empty?
       self.reviews.each do |review|
         if review.rating # In case user only submitted review
-          rating += review.rating.to_i
+          rating += review.rating.to_f
           count += 1
         end
       end
-      return rating / count
+      average_rating = (sprintf "%.2f", rating / count).to_f
     else
       return 0
     end
@@ -47,14 +50,22 @@ class User < ApplicationRecord
   def is_reviewable_by?(user)
     traid_info = Traid.has_happened_between_users(self, user) # self => user from show page being reviewed
     if traid_info["is_true?"]
-      if User.has_available_traid_review?(user, traid_info["key"])
-        return true
-      else
-        return false
-      end
-    else
-      return false
+        traid_info["keys"].each do |key|
+          return true if User.has_available_traid_review?(user, key)
+        end
     end
+
+    return false
+
+    # if traid_info["is_true?"]
+    #   if User.has_available_traid_review?(user, traid_info["key"])
+    #     return true
+    #   else
+    #     return false
+    #   end
+    # else
+    #   return false
+    # end
   end
   
   def self.has_available_traid_review?(reviewing_user, key)
