@@ -1,4 +1,4 @@
-$(document).ready(function(){
+document.addEventListener("turbolinks:load", function() {
   // $('#hidden-review-form').css("visibility","hidden")
 
   $('.toggle-review-form').click(function(){
