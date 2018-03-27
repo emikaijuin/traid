@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   def index
     @user = current_user
     @traids = Traid.get_active_traids(@user)
-    @finalized_traids = Traid.where(user: @user.id, status: "finalized")
+    @finalized_traids = Traid.where(user: @user.id, status: 3)
   end
 
   def show
