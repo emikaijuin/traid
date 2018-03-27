@@ -35,8 +35,8 @@
               <h4>Is offering:</h4>
               <% if !@user.is_seeking.empty? %>
                 <ul>
-                  <% @user.is_seeking.each do |i| %>
-                    <li><%= i %></li>
+                  <% @user.is_seeking.each do |is_seeking| %>
+                    <li><%= is_seeking %></li>
                   <% end %>
                 </ul>
               <% else %>
@@ -49,8 +49,8 @@
               <h4>Is seeking:</h4>
               <% if !@user.is_offering.empty? %>
               <ul>
-                <% @user.is_offering.each do |i| %>
-                  <li><%= i %></li>
+                <% @user.is_offering.each do |is_offering| %>
+                  <li><%= is_offering %></li>
                 <% end %>
               </ul>
               <% else %>
