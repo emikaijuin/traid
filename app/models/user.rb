@@ -26,6 +26,16 @@ class User < ApplicationRecord
     presence: true
   validates :last_name, 
     presence: true
+  validates :address,
+    presence: true
+  validates :city,
+    presence: true
+  validates :state,
+    presence: true
+  validates :zip_code,
+    presence: true
+  validates :country,
+    presence: true
 
   # Model Methods
   
@@ -45,6 +55,18 @@ class User < ApplicationRecord
     }
     
     google_maps_information
+  end
+  
+  def convert_address_to_coords
+    full_address = self.full_address
+    url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + full_address + "&key=" + ENV['GOOGLE_MAPS_KEY']
+    res = HTTParty.get(url)
+    coordinates = {
+      "lat" => res["results"][0]["geometry"]["location"]["lat"],
+      "long" => res["results"][0]["geometry"]["location"]["lng"]
+    }
+    
+    coordinates
   end
   
   def rating
@@ -73,15 +95,6 @@ class User < ApplicationRecord
 
     return false
 
-    # if traid_info["is_true?"]
-    #   if User.has_available_traid_review?(user, traid_info["key"])
-    #     return true
-    #   else
-    #     return false
-    #   end
-    # else
-    #   return false
-    # end
   end
   
   def self.has_available_traid_review?(reviewing_user, key)

@@ -29,5 +29,18 @@ document.addEventListener("turbolinks:load", function() {
     
     return input
   };
+  
+  
+  var lat = parseFloat($('#lat').html())
+  var long = parseFloat($('#long').html())
+  var mapOptions = {
+    zoom: 14,
+    center: new google.maps.LatLng(lat, long),
+    mapTypeId: google.maps.MapTypeId.ROADMAP,
+    draggable: false,
+    disableDefaultUI: true
+
+  }
+  var map = new google.maps.Map(document.getElementById("user-show-additional-info"), mapOptions);
 });
 
