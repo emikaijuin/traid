@@ -25,11 +25,26 @@ class User < ApplicationRecord
     presence: true
   validates :last_name, 
     presence: true
-  
-  # serialize :is_offering, Array
-  # serialize :is_seeking, Array
-  
+
   # Model Methods
+  
+  def full_address
+    return false if !(self.address && self.city && self.state && self.zip_code)
+    full_address = self.address + " " + self.city + ", " + self.state + " " + self.zip_code
+    
+    full_address
+  end
+  
+  def distance(user_2)
+    url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" + self.full_address + "&destinations=" + user_2.full_address + "&key=" + ENV['GOOGLE_MAPS_KEY']
+    res = HTTParty.get(url)
+    google_maps_information = {
+      "distance": res["rows"][0]["elements"][0]["distance"]["text"],
+      "duration": res["rows"][0]["elements"][0]["duration"]["text"]
+    }
+    
+    google_maps_information
+  end
   
   def rating
     rating = 0

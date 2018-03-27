@@ -37,6 +37,8 @@ gem 'bulma-rails', "~> 0.6.2"
 
 gem 'omniauth-google-oauth2'
 
+gem 'httparty'
+
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

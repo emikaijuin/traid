@@ -3,9 +3,12 @@
     padding: 1em;
 }
 #search-index-container {
-    padding-top: 5%;
+    padding-top: 1%;
     margin: auto;
     width: 40%;
+}
+#filter-container {
+    padding: 1em;
 }
 div#search-index-container > div:nth-of-type(odd) {
     background: rgba(255, 165, 0, 0.3);
