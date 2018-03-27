@@ -1,8 +1,8 @@
 <div class="columns" id="user-homepage-container">
   <div class="column is-two-thirds">
       <div id="user-homepage-community-news">
-        COMMUNITY NEWS
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        <h3>Community News</h3>
+        <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
         Sed sed ligula porttitor, mollis ex nec, ultricies est.
         Duis sollicitudin dolor laoreet, finibus elit vitae, placerat purus.
         Pellentesque et erat sed eros porttitor facilisis.
@@ -10,10 +10,32 @@
         Fusce id mi sollicitudin, rhoncus velit non, ornare tellus.
         Etiam placerat ante quis arcu mattis convallis.
         Praesent dignissim dui eget tristique egestas.
-        Duis suscipit ipsum vel lacinia scelerisque.
+        Duis suscipit ipsum vel lacinia scelerisque.</div>
+        <br>
+        <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Sed sed ligula porttitor, mollis ex nec, ultricies est.
+        Duis sollicitudin dolor laoreet, finibus elit vitae, placerat purus.
+        Pellentesque et erat sed eros porttitor facilisis.
+        Maecenas venenatis magna eu lacus euismod maximus.
+        Fusce id mi sollicitudin, rhoncus velit non, ornare tellus.
+        Etiam placerat ante quis arcu mattis convallis.
+        Praesent dignissim dui eget tristique egestas.
+        Duis suscipit ipsum vel lacinia scelerisque.</div>
+        <br>
+        <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Sed sed ligula porttitor, mollis ex nec, ultricies est.
+        Duis sollicitudin dolor laoreet, finibus elit vitae, placerat purus.
+        Pellentesque et erat sed eros porttitor facilisis.
+        Maecenas venenatis magna eu lacus euismod maximus.
+        Fusce id mi sollicitudin, rhoncus velit non, ornare tellus.
+        Etiam placerat ante quis arcu mattis convallis.
+        Praesent dignissim dui eget tristique egestas.
+        Duis suscipit ipsum vel lacinia scelerisque.</div>
       </div>
+      
+      <br>
       <div id="user-homepage-recommended-for-user">
-        RECOMMENDED FOR USER
+        <h3>Recommended For You</h3>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
         Sed sed ligula porttitor, mollis ex nec, ultricies est.
         Duis sollicitudin dolor laoreet, finibus elit vitae, placerat purus.
@@ -28,20 +50,34 @@
   
   <div class="column is-one-third">
     <div id="user-homepage-notifications">
-        NOTIFICATIONS
-        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-        <li>Sed sed ligula porttitor, mollis ex nec, ultricies est.</li>
-        <li>Duis sollicitudin dolor laoreet, finibus elit vitae, placerat purus.</li>
-        <li>Pellentesque et erat sed eros porttitor facilisis.</li>
-        <li>Maecenas venenatis magna eu lacus euismod maximus.</li>
-        <li>Fusce id mi sollicitudin, rhoncus velit non, ornare tellus.</li>
-        <li>Etiam placerat ante quis arcu mattis convallis.</li>
-        <li>Praesent dignissim dui eget tristique egestas.</li>
-        <li>Duis suscipit ipsum vel lacinia scelerisque.      </li>
+        <h3>Notifications</h3>
+        <% if !@user.notifications.empty? %>
+          <% @user.notifications.each do |notification| %>
+            <li>
+              <span>
+                <%= notification.text %>
+                <%= link_to "View More", notification_path(notification), :method => :delete %>
+              </span>
+            </li>
+          <% end %>
+        <% else %>
+          <p>You have no new notifications.</p>
+        <% end %>
     </div>
+    <br>
     <div id="user-homepage-active-traids">
-      <% @traids.each_with_index do |traid, index| %>
-       <%= render "users/traid_link", traid: traid, index: index %>
+      <h3>Ongoing Traids</h3>
+      <% if !@traids.empty? %>
+        <% @traids.each_with_index do |traid, index| %>
+          <% unless traid.finalized? || traid.canceled? %>
+           <%= render "users/traid_link", traid: traid, index: index %>
+           <hr>
+         <% end %>
+        <% end %>
+      <% else %>
+        <div>
+          You have no ongoing traids.
+        </div>
       <% end %>
     </div>
   </div>

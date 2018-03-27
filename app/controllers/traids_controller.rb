@@ -29,11 +29,10 @@ class TraidsController < ApplicationController
     @traid_1 = current_user.traids.new(traid_params)
     @traid_1.status = "requested"
     @traid_2 = Traid.create_copy(params[:traid_user_id], @traid_1.key, traid_params) if @traid_1.save
-
-
     respond_to do |format|
       if @traid_2.save
         TraidLog.add_traid_to_log(@traid_2.key)
+        Notification.create(text: "You have received a new traid offer!", user_id: User.find(params[:traid_user_id]).id, traid_id: @traid_2.id)
         format.html { redirect_to @traid_1, notice: "Traid was sent to #{@user_2} (ID: #{@traid_1.key})" }
         # format.json { render :show, status: :created, location: @traid }
         format.js 
@@ -48,6 +47,7 @@ class TraidsController < ApplicationController
     
     respond_to do |format|
       if @traid.update(traid_params) && @traid.negotiating!
+        Notification.create(text: "You have a counter-offer on one of your traids.", traid_id: @traid.id, user_id: User.find(params[:requested_user_id]).id)
         TraidLog.add_traid_to_log(@traid.key)
         format.html { redirect_to @traid, notice: 'Traid was successfully updated.' }
         format.json { render :show, status: :ok, location: @traid }
@@ -78,12 +78,30 @@ class TraidsController < ApplicationController
     end
     
     if @accepted_traid.save && @accepter_traid.save
+      Notification.create(text: "Your traid has been accepted!", user_id: @accepted_traid.user_id, traid_id: @accepted_traid.id)
       redirect_to traid_path(@accepter_traid)
     else
       flash[:notice] = "There was a problem, please try again."
       redirect_to traid_path(@accepter_traid)
     end
     
+  end
+  
+  def cancel
+    @canceler_traid = Traid.find(params[:canceler_traid_id])
+    @canceled_traid = Traid.find(params[:canceled_traid_id])
+    
+    [@canceler_traid, @canceled_traid].each do |traid|
+      traid.canceled!
+    end
+    
+    if @canceled_traid.save && @canceler_traid.save
+      Notification.create(text: "Your traid was canceled.", user_id: @canceled_traid.user_id, traid_id: @canceled_traid.id)
+      redirect_to traid_path(@canceler_traid)
+    else
+      flash[:notice] = "There was a problem, please try again."
+      redirect_to traid_path(@canceler_traid)
+    end    
   end
 
   private

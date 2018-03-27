@@ -89,7 +89,6 @@
     margin: auto;
 }
 .user-homepage-traid-snippet {
-    background-color: rgba(255, 165, 0, 0.1);
     margin: 1em 0;
     padding: 1em;
     position: relative;
@@ -101,4 +100,23 @@
     position: absolute;
     top: 1em;
     right: 1em;
+}
+#user-homepage-notifications {
+    background-color: rgba(0, 209, 178, 0.1);
+    padding: 1em;
+    min-height: 7%;
+}
+#user-homepage-active-traids {
+    background-color: rgba(255, 165, 0, 0.1);
+    margin: 1em 0;
+    padding: 1em;
+    position: relative;  
+}
+#user-homepage-community-news {
+    border: 1px solid rgba(255, 165, 0, 0.5);
+    padding: 1em;
+}
+#user-homepage-recommended-for-user {
+    border: 1px solid rgba(0, 209, 178, 0.5);
+    padding: 1em;
 }
