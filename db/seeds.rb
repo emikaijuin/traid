@@ -47,6 +47,7 @@ real_addresses = [
 
 ActiveRecord::Base.transaction do
   200.times do |i|
+    address = real_addresses[rand(0..real_addresses.length - 1)]
     user = User.new 
     user.first_name = Faker::Name.first_name
     user.last_name = Faker::Name.last_name
@@ -56,10 +57,11 @@ ActiveRecord::Base.transaction do
     user.email = Faker::Internet.free_email
     user.phone_number = Faker::PhoneNumber.phone_number
     user.password = "password"
-    user.address = real_addresses[rand(0..real_addresses.length-1)][0]
+    user.address = address[0]
     user.secondary_address = Faker::Address.secondary_address if i%4 == 0
-    user.city = real_addresses[rand(0..real_addresses.length-1)][1]
-    user.state = "MA"
+    user.city = address[1]
+    user.zip_code = address[3]
+    user.state = address[2]
     user.country = "USA"
     user.is_offering = [Faker::Commerce.product_name,Faker::Job.title,Faker::Commerce.product_name]
     user.is_seeking =  [Faker::Commerce.product_name,Faker::Job.title,Faker::Commerce.product_name]
