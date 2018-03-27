@@ -32,18 +32,19 @@
           <span>
             <% if logged_in? %>
               <%= link_to "View Profile", "/users/#{current_user.id}" %>
-            <% end %>
           </span>
-          <% if logged_in? -%>
-            <span>
-              <%= button_to t(".sign_out"), sign_out_path, method: :delete %>
-            </span>
+          <span>
+            <%= button_to t(".sign_out"), sign_out_path, method: :delete %>
+          </span>
+          <span>
+            <%= button_to t(".user_homepage"), users_path %>
+          </span>
           <% else -%>
             <span id="test">
-              <%= link_to t(".sign_in"), sign_in_path %>
+              <%= button_to t(".sign_in"), sign_in_path %>
             </span>
             <span>
-              <%= link_to "Sign in with Google", "/auth/google_oauth2", id: "sign_in" %>
+              <%= button_to "Sign in with Google", "/auth/google_oauth2", id: "sign_in" %>
             </span>
           <% end -%>
         </div>
@@ -69,25 +70,30 @@
         </div>
         
         <div class="navbar-end">
-          
-          <div class="navbar-item" id="profile">
-            <% if logged_in? %>
-              <%= link_to "View Profile", "/users/#{current_user.id}" %>
-            <% end %>
-          </div>
-          
-          <div class="navbar-item" id="sign-out-button">
-            <% if logged_in? -%>
-              <%= link_to t(".sign_out"), sign_out_path, method: :delete %>
-            <% else -%>
-              <span>
+
+          <% if logged_in? %>
+            <div class="navbar-item" id="user-homepage">
+                <%= link_to "User Homepage", users_path %>
+            </div>
+            <div class="navbar-item" id="profile">
+                <%= link_to "View Profile", user_path(current_user)%>
+            </div>
+            <div class="navbar-item" id="edit-profile">
+              <%= link_to "Edit Profile", edit_user_path(current_user) %>
+            </div>
+            <div class="navbar-item" id="sign-out">
+              <%= link_to t(".sign_out"), sign_out_path, method: :delete %>  
+            </div>
+          <% else %>
+              <div class="navbar-item" id="sign-in">
                 <%= link_to "Sign In", sign_in_path %>
-              </span>
-              <span>
+              </div>
+              <div class="navbar-item" id="sign-in-with-google">
                 <%= link_to "Sign in with Google", "/auth/google_oauth2", id: "sign_in" %>
-              </span>
-            <% end -%>
-          </div>
+              </div>
+          <% end %>
+          
+        </div>
           
         </div>
     </div>

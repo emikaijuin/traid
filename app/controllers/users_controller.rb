@@ -23,6 +23,9 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    @user.is_seeking = params[:user][:is_seeking].split(",") if @user.is_seeking != params[:user][:is_seeking].split(",")
+    @user.is_offering = params[:user][:is_offering].split(",") if @user.is_offering != params[:user][:is_offering].split(",")
+    
     if params[:password] == params[:password_confirmation]
       respond_to do |format|
         if @user.save
@@ -37,8 +40,12 @@ class UsersController < ApplicationController
   end
 
   def update
+    @user.update_attributes(user_params)
+    @user.is_seeking = params[:user][:is_seeking].split(",") if @user.is_seeking != params[:user][:is_seeking].split(",")
+    @user.is_offering = params[:user][:is_offering].split(",") if @user.is_offering != params[:user][:is_offering].split(",")
+    
     respond_to do |format|
-      if @user.update(user_params)
+      if @user.save(user_params)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else
@@ -63,6 +70,8 @@ class UsersController < ApplicationController
     end
 
     def user_params
+      # is_seeking = params[:user][:is_seeking].split(",")
+      # is_offering = params[:user][:is_offering].split(",")
       params.require(:user).permit(:first_name, :last_name, :username, :birthday, :email, :phone_number, :password, :password_confirmation, :address, :secondary_address, :city, :state, :country, :is_offering, :is_seeking)
     end
     

@@ -10,17 +10,21 @@
             <h3>My Traid Terms</h3>
             <%= render "traids/traid_information", traid: @current_user_traid %>
             <br>
-            <button class="button is-outlined"><%= link_to 'Negotiate Traid', edit_traid_path(@traid) %></button>
+            <% unless @traid.finalized? %>
+              <button class="button is-outlined"><%= link_to 'Negotiate Traid', edit_traid_path(@traid) %></button>
+            <% end %>
           </div>
           
           <div id = "requested-user-traid-copy" class="column" style="border: 1px solid gainsboro">
-            <h3><%=@requested_user_traid.user.username%>'s Traid Terms</h3>
+            <h3><%= link_to "#{@requested_user_traid.user.username}'s", user_path(@requested_user_traid.user) %> Traid Terms</h3>
             <%= render "traids/traid_information", traid: @requested_user_traid %>
             <br>
-            <%= form_for(:traids, :url => accept_traid_path) do |f| %>
-              <%= hidden_field_tag(:accepted_traid_id, @requested_user_traid.id) %>
-              <%= hidden_field_tag(:accepter_traid_id, @current_user_traid.id) %>
+            <% unless @traid.finalized? %>
+              <%= form_for(:traids, :url => accept_traid_path) do |f| %>
+                <%= hidden_field_tag(:accepted_traid_id, @requested_user_traid.id) %>
+                <%= hidden_field_tag(:accepter_traid_id, @current_user_traid.id) %>
               <%= f.submit "Accept Traid", :class => "button is-outlined" %>
+            <% end %>
             <% end %>
           </div>
         </div>
@@ -33,16 +37,16 @@
               <li>
                 <div class="columns">
                   <div class="column">
-                    <p><%= date.to_date.to_s %></p>
-                    <div class="columns">
-                      
+                    <p class="traid-show-previous-traids-dates"><%= date.to_date.to_s %></p>
+                    
+                    <div class="columns traid-log-container is-hidden">
                       <% user_traid.each do |user_id, traid_log| %>
                         <div class="column">
-                          <%= render "traid_logs/traid_log_information", traid_log: traid_log %>
+                          <%= render "traid_logs/traid_log_information", traid_log: traid_log, user_id: user_id %>
                         </div>
                       <% end %>
-                      
                     </div>
+                    
                   </div>
                 </div>
               </li>

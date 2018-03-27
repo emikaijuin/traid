@@ -41,22 +41,7 @@
     </div>
     <div id="user-homepage-active-traids">
       <% @traids.each_with_index do |traid, index| %>
-        <div class="user-homepage-traid-snippet">
-          <br>
-          <div>
-            <h4>Current offer:</h4>
-            <p><%= traid.offer %></p>
-          </div>
-          <br>
-          <div>
-            <h6>Traid Sent:</h6>
-            <p><%= traid.updated_at.to_date %></p>
-          </div>
-          <br>
-          <div>
-            <%= link_to "View Traid", traid_path(traid) %>
-          </div>
-        </div>
+       <%= render "users/traid_link", traid: traid, index: index %>
       <% end %>
     </div>
   </div>

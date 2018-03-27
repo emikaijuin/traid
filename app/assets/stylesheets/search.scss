@@ -1,3 +1,15 @@
-// Place all the styles related to the search controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.search-result {
+    margin: 1em;
+    padding: 1em;
+}
+#search-index-container {
+    padding-top: 5%;
+    margin: auto;
+    width: 40%;
+}
+div#search-index-container > div:nth-of-type(odd) {
+    background: rgba(255, 165, 0, 0.3);
+}
+div#search-index-container > div:nth-of-type(even) {
+    background: rgba(0, 168, 81, 0.3);
+}
