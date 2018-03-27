@@ -14,6 +14,7 @@ class User < ApplicationRecord
   has_many :traids
   has_many :reviews
   has_many :ratings
+  has_many :notifications
   
 
   validates :email, 
