@@ -12,6 +12,18 @@ class Traid < ApplicationRecord
   
   class << self
     
+    def get_active_traids(user)
+      traids = []
+      if !Traid.where(user_id: user.id).empty?
+        Traid.where(user_id: user.id).each do |traid|
+          if !traid.canceled? && !traid.finalized?
+            traids << traid
+          end
+        end
+      end
+      return traids
+    end
+    
     def unreviewed_traids(user_being_reviewed, user_reviewing)
       unreviewed_traids = []
       Traid.where(user_id: user_reviewing.id).each do |traid|
