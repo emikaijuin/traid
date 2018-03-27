@@ -65,6 +65,7 @@
         <% end %>
     </div>
     <br>
+    
     <div id="user-homepage-active-traids">
       <h3>Ongoing Traids</h3>
       <% if !@traids.empty? %>
@@ -80,5 +81,22 @@
         </div>
       <% end %>
     </div>
+    <br>
+    <div id="user-homepage-finalized-traids">
+      <h3>Finalized Traids</h3>
+      <% if !@finalized_traids.empty? %>
+        <% @finalized_traids.each_with_index do |traid, index| %>
+          <% unless traid.finalized? || traid.canceled? %>
+           <%= render "users/traid_link", traid: traid, index: index %>
+           <hr>
+         <% end %>
+        <% end %>
+      <% else %>
+        <div>
+          You have no finalized traids.
+        </div>
+      <% end %>
+    </div>
+    
   </div>
 </div>

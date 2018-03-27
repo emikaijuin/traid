@@ -6,6 +6,7 @@ class UsersController < ApplicationController
   def index
     @user = current_user
     @traids = Traid.get_active_traids(@user)
+    @finalized_traids = Traid.where(user: @user.id, status: "finalized")
   end
 
   def show
@@ -60,6 +61,15 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+  
+  def recent_user_addresses
+    users = User.all[-50]
+    addresses = []
+    
+    users.each do |user|
+      addresses << user.full_address if user.full_address
     end
   end
 
