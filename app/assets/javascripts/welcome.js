@@ -5,7 +5,6 @@ document.addEventListener("turbolinks:load", function() {
     mapTypeId: google.maps.MapTypeId.ROADMAP,
     draggable: false,
     disableDefaultUI: true
-
   }
   var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
 });
