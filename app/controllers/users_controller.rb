@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   def index
     @user = current_user
-    @traids = Traid.where(user_id: @user.id)
+    @traids = Traid.get_active_traids(@user)
   end
 
   def show
@@ -70,8 +70,6 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      # is_seeking = params[:user][:is_seeking].split(",")
-      # is_offering = params[:user][:is_offering].split(",")
       params.require(:user).permit(:first_name, :last_name, :username, :birthday, :email, :phone_number, :password, :password_confirmation, :address, :secondary_address, :city, :state, :zip_code, :country, :is_offering, :is_seeking)
     end
     
