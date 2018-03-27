@@ -1,20 +1,31 @@
-<h4><%= user.username %></h4>
-<div class="search-result columns">
-  <div class = "search-result-seeking column">
-  <p>Is seeking: </p>
-    <ul>
-      <% user.is_seeking.each do |seeking| %>
-        <li><%= seeking %></li>
-      <% end %>
-    </ul>
+<div class="search-result">
+  <h4><%= user.username %> 
+    <% if user.full_address && current_user.full_address %>
+      <span>
+        <%= current_user.distance(user)[:distance] %>
+      </span>
+      <span class="distance" style="display: none;"><%=current_user.distance(user)[:distance]%></span>
+    <% end %>
+  </h4>
+  
+      
+  <div class="search-result columns">
+    <div class = "search-result-seeking column">
+    <p>Is seeking: </p>
+      <ul>
+        <% user.is_seeking.each do |seeking| %>
+          <li><%= seeking %></li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="search-result-offering column">
+      <p>Is offering: </p>
+      <ul>
+        <% user.is_offering.each do |offering| %>
+          <li><%= offering %></li>
+        <% end %>
+      </ul>
+    </div>
   </div>
-  <div class="search-result-offering column">
-    <p>Is offering: </p>
-    <ul>
-      <% user.is_offering.each do |offering| %>
-        <li><%= offering %></li>
-      <% end %>
-    </ul>
-  </div>
-    <p><%= link_to "View more...", "users/#{user.id}"%></p>
+  <p><%= link_to "View more...", "users/#{user.id}"%></p>
 </div>
