@@ -1,4 +1,4 @@
-$(document).ready(function() {
+document.addEventListener("turbolinks:load", function() {
  var mapOptions = {
     zoom: 14,
     center: new google.maps.LatLng(37.76, -122.4194),
