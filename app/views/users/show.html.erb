@@ -16,7 +16,7 @@
           <button class="button is-primary is-outlined" id="toggle-traid-form"> Traid with <%=@user.username%>!</button>
         </div>
         <div>
-          <span><%= @user.traids.count %><%= @user.traids.count == 1 ? " TRAIDS" : " TRAID" %> </span>
+          <span><%= @user.traids.count %><%= @user.traids.count == 1 ? " TRAID" : " TRAIDS" %> </span>
         </div> 
       </div>
       
@@ -35,20 +35,28 @@
             <br>
             <div>
               <h4>Is offering:</h4>
-              <ul>
-                <% @user.is_seeking.each do |i| %>
-                  <li><%= i %></li>
-                <% end %>
-              </ul>
+              <% if !@user.is_seeking.empty? %>
+                <ul>
+                  <% @user.is_seeking.each do |i| %>
+                    <li><%= i %></li>
+                  <% end %>
+                </ul>
+              <% else %>
+                <div>User is not currently seeking anything.</div>
+              <% end %>
             </div>
             <br>
             <div>
               <h4>Is seeking:</h4>
+              <% if !@user.is_offering.empty? %>
               <ul>
                 <% @user.is_offering.each do |i| %>
                   <li><%= i %></li>
                 <% end %>
               </ul>
+              <% else %>
+                <div>User is not currently offering anything.</div>
+              <% end %>
             </div>
 
           </div>
