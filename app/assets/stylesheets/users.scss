@@ -24,6 +24,7 @@
 }
 #user-show-container {
     width: 95%;
+    height: 95%;
     margin: auto;
     background: rgba(0,209,178,0.1);
 }
@@ -39,6 +40,8 @@
 }
 #user-show-additional-info{
     margin: 2.5%;
+    height: 100%;
+    width: 100%;
     // border: 1px solid rgb(230,207,139);
 }
 #user-show-traid-form {
