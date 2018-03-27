@@ -46,6 +46,7 @@
         </div>
         <br>
         <%= hidden_field_tag(:traid_user_id, params[:id]) %>
+        <%= hidden_field_tag(:requested_user_id, params[:requested_user_id]) %>
         
         <div>
           <%= f.submit "Offer Traid", :class => "button is-outlined", :style => "color: rgb(108,100,139)" %>
