@@ -97,6 +97,8 @@
       </div>
     
       <div class="column is-one-third" id="user-show-map-container">
+        <br>
+        <br>
         <div style="height: 250px; width: 500px;">
           <span id="lat" style="display: none;"><%= @location["lat"]%></span>
           <span id="long" style="display: none;"><%= @location["long"]%></span>
@@ -105,6 +107,7 @@
       </div>        
     
       <div class="column is-one-third" id="user-show-traid-form">
+        <br><br>
         <%= render "traids/form", traid: @traid %>
         <span id="close-traid-form"><i class="fas fa-times"></i></span>
       </div>        
