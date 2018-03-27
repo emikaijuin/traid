@@ -53,6 +53,17 @@
     top: 1em;
     right: 1em;
 }
+#close-traid-form-success{
+    position: absolute;
+    top: 1em;
+    right: 0.5em;
+}
+#close-traid-form-success :hover {
+    cursor: pointer;
+}
+#close-traid-form :hover{
+    cursor: pointer;
+}
 .user-reviews{
     width: 96%;
     margin: 2% auto !important;
@@ -78,6 +89,9 @@
     position: absolute;
     top: 1%;
     right: 1%;
+}
+#close-review-form :hover {
+    cursor: pointer;
 }
 .toggle-review-form :hover {
     cursor: pointer;
