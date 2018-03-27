@@ -36,7 +36,7 @@ class User < ApplicationRecord
   end
   
   def distance(user_2)
-    url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" + self.full_address + "&destinations=" + user_2.full_address
+    url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" + self.full_address + "&destinations=" + user_2.full_address + "&key=" + ENV['GOOGLE_MAPS_KEY']
     res = HTTParty.get(url)
     google_maps_information = {
       "distance": res["rows"][0]["elements"][0]["distance"]["text"],
