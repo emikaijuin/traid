@@ -62,6 +62,15 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def recent_user_addresses
+    users = User.all[-50]
+    addresses = []
+    
+    users.each do |user|
+      addresses << user.full_address if user.full_address
+    end
+  end
 
   private
 
