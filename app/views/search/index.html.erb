@@ -1,4 +1,4 @@
-<div>
+<div id="search-index-container">
   <% if !@results.empty? %>
     <% @results.each do |result| %>
       <%= render '/search/result', user: User.find(result[:searchable_id])%>
