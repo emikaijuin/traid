@@ -1,6 +1,16 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+// Sign Up and Edit
+.user-form {
+    margin: auto;
+    width: 50%;
+    padding: 1em;
+    background-color: rgba(0,209,178,0.1);
+}
+
+// Show
 #user-show-header{
     width: 50%;
     margin-left: 2.5%;
@@ -15,14 +25,17 @@
 #user-show-container {
     width: 95%;
     margin: auto;
+    background: rgba(0,209,178,0.1);
 }
 #user-show-info-container {
     // border: 1px solid rgb(230,207,139);
     margin: 2.5%;
+    background-color: white;
 }
 #user-show-reviews-container {
 //   border: 1px solid rgb(230,207,139);
    margin: 2.5%;
+   background-color: white;
 }
 #user-show-additional-info{
     margin: 2.5%;
@@ -34,13 +47,20 @@
 }
 #close-traid-form {
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 1em;
+    right: 1em;
 }
 .user-reviews{
     width: 96%;
     margin: 2% auto !important;
-    background-color: gainsboro;
+    background-color: rgba(255, 165, 0, 0.1);
+    position: relative;
+}
+.review-offer {
+    margin: auto;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0%);
 }
 #hidden-review-form{
     display: none;
