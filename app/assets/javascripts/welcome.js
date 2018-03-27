@@ -1,7 +1,7 @@
 document.addEventListener("turbolinks:load", function() {
  var mapOptions = {
     zoom: 14,
-    center: new google.maps.LatLng(37.76, -122.4194),
+    center: new google.maps.LatLng(42.3601, -71.0589),
     mapTypeId: google.maps.MapTypeId.ROADMAP,
     draggable: false,
     disableDefaultUI: true
