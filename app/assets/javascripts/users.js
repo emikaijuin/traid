@@ -15,7 +15,7 @@ document.addEventListener("turbolinks:load", function() {
   
   function toggle_user_show_secondary_column(){
     $('#user-show-traid-form').toggle();
-    $('#user-show-additional-info').toggle();    
+    $('#user-show-map-container').toggle();    
   }
   
   $('#user-form-is-seeking').val(removeExtraChars($('#user-form-is-seeking')))

@@ -96,11 +96,11 @@
         </div>
       </div>
     
-      <div class="column is-one-third">
+      <div class="column is-one-third" id="user-show-map-container">
         <div style="height: 250px; width: 500px;">
           <span id="lat" style="display: none;"><%= @location["lat"]%></span>
           <span id="long" style="display: none;"><%= @location["long"]%></span>
-          <div id="user-show-additional-info" ></div>
+          <div id="user-show-map" ></div>
         </div>
       </div>        
     
@@ -125,7 +125,7 @@
     disableDefaultUI: true
 
   }
-  var map = new google.maps.Map(document.getElementById("user-show-additional-info"), mapOptions);
+  var map = new google.maps.Map(document.getElementById("user-show-map"), mapOptions);
   
   var circle = new google.maps.Circle({
             strokeColor: '#FF0000',
