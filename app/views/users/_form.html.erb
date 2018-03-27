@@ -1,7 +1,8 @@
-<div>
+<div id="user-edit-form">
   <%= form_for @user do |f| %>
   
     <div>
+      <h4>Personal Details</h4>
       <p><%= f.label :first_name %>: <%= f.text_field :first_name %></p>  
       <p><%= f.label :last_name %>: <%= f.text_field :last_name %></p>  
       <p><%= f.label :birthday %>: <%= f.date_field :birthday %></p>
@@ -11,18 +12,23 @@
         <span><%= f.label :male %> <%= f.radio_button :gender, 'Male' %></span>
       </p> 
     </div>
-    
+    <br>
     <div>
+      <h4>Account Information</h4>
       <div>
           <p><%= f.label :username %>: <%= f.text_field :username %></p>
-          <p>You can change your username whenever you'd like.</p>
       </div>
-      <p><%= f.label :email %>: <%= f.text_field :email %></p>
+      <% if url_for(:only_path => false) == "users/#{current_user.id}/edit" %>
+        <p><%= f.label :email %>: <%= f.text_field :email, :readonly => true %></p>
+      <% else %>
+        <p><%= f.label :email %>: <%= f.text_field :email %></p>
+      <% end %>
       <p><%= f.label :password %>: <%= f.password_field :password %></p>
       <p><%= f.label :password_confirmation %>: <%= f.password_field :password_confirmation %></p>
     </div>
-    
+    <br>
     <div>
+      <h4>Location</h4>
       <p><%=f.label :address %>: <%= f.text_field :address %></p>
       <p><%=f.label :secondary_address %>: <%= f.text_field :secondary_address %></p>
       <p>
@@ -32,11 +38,12 @@
       </p>
       <p><%=f.label :country %>: <%= f.text_field :country %></p>
     </div>
-    
+    <br>
     <div>
+      <h4>Your Traid Interests</h4>
       <%= render "users/traid_interests", f: f %>
     </div>
-    
+    <br>
     <div>
       <%= f.submit :submit, :id => "new-user-form" %>
     </div>
