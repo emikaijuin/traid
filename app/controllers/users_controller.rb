@@ -13,6 +13,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @review = Review.new
     @traid = Traid.new
+    @location = @user.convert_address_to_coords
   end
 
   def new
@@ -61,15 +62,6 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
       format.json { head :no_content }
-    end
-  end
-  
-  def recent_user_addresses
-    users = User.all[-50]
-    addresses = []
-    
-    users.each do |user|
-      addresses << user.full_address if user.full_address
     end
   end
 
