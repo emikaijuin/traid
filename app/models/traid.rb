@@ -23,10 +23,20 @@ class Traid < ApplicationRecord
     end
     
     def has_happened_between_users(user_being_reviewed, user_reviewing)
+      traid_found = false
+      keys = []
       user_reviewing.traids.each do |traid|
-        return {"is_true?" => true, "key" => traid.key} if !user_being_reviewed.traids.where(key: traid.key).empty?
+        if !user_being_reviewed.traids.where(key: traid.key).empty?
+          traid_found = true
+          keys << traid.key
+        end
       end
-      return {"is_true?" => false}
+      
+      if traid_found == true
+        return {"is_true?" => true, "keys" => keys}
+      else
+        return {"is_true?" => false}
+      end
     end
     
     def status(status_1, status_2)
