@@ -15,14 +15,8 @@
     <br>
     <div>
       <h4>Account Information</h4>
-      <div>
-          <p><%= f.label :username %>: <%= f.text_field :username %></p>
-      </div>
-      <% if url_for(:only_path => false) == "users/#{current_user.id}/edit" %>
-        <p><%= f.label :email %>: <%= f.text_field :email, :readonly => true %></p>
-      <% else %>
-        <p><%= f.label :email %>: <%= f.text_field :email %></p>
-      <% end %>
+      <p><%= f.label :username %>: <%= f.text_field :username %></p>
+      <p><%= f.label :email %>: <%= f.text_field :email %></p>
       <p><%= f.label :password %>: <%= f.password_field :password %></p>
       <p><%= f.label :password_confirmation %>: <%= f.password_field :password_confirmation %></p>
     </div>
