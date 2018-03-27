@@ -11,9 +11,15 @@
   
 <div id="search-index-container">
 
-  <% if !@results.empty? %>
+  <% if @results.empty? %>
+     Sorry, there weren't any results for that.
+  <% elsif @results.length == 1 && User.find(@results[0][:searchable_id]) == current_user %>
+      Sorry, there weren't any results for that.
+  <% else %>
     <% @results.each do |result| %>
-      <%= render '/search/result', user: User.find(result[:searchable_id])%>
+      <% unless User.find(result[:searchable_id]) == current_user %>
+        <%= render '/search/result', user: User.find(result[:searchable_id])%>
+      <% end %>
     <% end %>
   <% end %>
 </div>

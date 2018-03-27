@@ -17,5 +17,17 @@ document.addEventListener("turbolinks:load", function() {
     $('#user-show-traid-form').toggle();
     $('#user-show-additional-info').toggle();    
   }
+  
+  $('#user-form-is-seeking').val(removeExtraChars($('#user-form-is-seeking')))
+  $('#user-form-is-offering').val(removeExtraChars($('#user-form-is-offering')))
+  
+  function removeExtraChars(element) {
+    input = $(element).val()
+    input = input.replace("[","")
+    input = input.replace("]","")
+    input = input.replace(/"/g, "")
+    
+    return input
+  };
 });
 
