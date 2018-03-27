@@ -1,0 +1,17 @@
+<div class="user-homepage-traid-snippet">
+
+  <div class="user-homepage-traid-offfer">
+    <h4>Agreed traid:</h4>
+    <p><%= traid.offer %></p>
+  </div>
+
+  <div class="user-homepage-traid-date">
+    <h6>Traid Sent:</h6>
+    <p><%= traid.updated_at.to_date %></p>
+  </div>
+
+  <div class="user-homepage-traid-link">
+    <%= link_to "View Traid", traid_path(traid) %>
+  </div>
+  
+</div>
