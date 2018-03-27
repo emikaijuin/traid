@@ -26,13 +26,11 @@
     
     <div class="columns is-one-third">
       <div class="column">
-        
+      <div>
+        <span>Community: <%= @user.city %></span>
+      </div>  
         <div class="columns" id="user-show-info-container">
           <div class="column">
-            <div>
-              <span>Community: <%= @user.city %></span>
-            </div>
-            <br>
             <div>
               <h4>Is offering:</h4>
               <% if !@user.is_seeking.empty? %>
@@ -45,7 +43,8 @@
                 <div>User is not currently seeking anything.</div>
               <% end %>
             </div>
-            <br>
+          </div>
+          <div class="column">
             <div>
               <h4>Is seeking:</h4>
               <% if !@user.is_offering.empty? %>
