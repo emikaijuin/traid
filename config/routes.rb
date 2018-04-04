@@ -2,7 +2,7 @@ include SessionsHelper
 
 Rails.application.routes.draw do
   
-
+  get 'traids/recent_traid_locations'=> "traids#recent_traid_locations", as: "recent_traid_locations"
   resources :traid_logs
   resources :traids
   post 'traids/accept' => "traids#accept", as: "accept_traid"
