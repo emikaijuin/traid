@@ -10,3 +10,51 @@
 
     </div>
 </div>
+
+<script>
+  var mapOptions = {
+    zoom: 14,
+    center: new google.maps.LatLng(42.3601, -71.0589),
+    mapTypeId: google.maps.MapTypeId.ROADMAP,
+    draggable: false,
+    disableDefaultUI: true
+  };
+ var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+ 
+ $.ajax({
+  type: "GET",
+  url: "traids/recent_traid_locations",
+  dataType: "json",
+  success: function(result){
+    // var coordinates_list = result["coordinate_list"];
+    var coordinatePairs = result["coordinate_pairs"];
+    appendMarkersToMap(coordinatePairs);
+    appendLinesToMap(coordinatePairs);
+  }
+});
+
+function appendMarkersToMap(coordinatePairs){
+  coordinatePairs.forEach(function(coordinatePair){
+    coordinatePair.forEach(function(coordinates){
+      coordinates = new google.maps.LatLng(coordinates["lat"],coordinates["long"])
+      var circle = new google.maps.Marker({
+        position: coordinates,
+        map: map      
+      });
+    });
+  });
+}
+
+function appendLinesToMap(coordinatePairs){
+  coordinatePairs.forEach(function(coordinatePair){
+    var polyline = new google.maps.Polyline({
+      path: coordinatePair,
+      strokeColor: "#FF0000",
+      strokeOpacity: 1.0,
+      strokeWeight: 2
+    });
+    polyline.setMap(map);
+  });
+}
+
+</script>
