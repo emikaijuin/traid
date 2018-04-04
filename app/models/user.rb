@@ -63,7 +63,7 @@ class User < ApplicationRecord
     res = HTTParty.get(url)
     coordinates = {
       "lat" => res["results"][0]["geometry"]["location"]["lat"],
-      "long" => res["results"][0]["geometry"]["location"]["lng"]
+      "lng" => res["results"][0]["geometry"]["location"]["lng"]
     }
     
     coordinates

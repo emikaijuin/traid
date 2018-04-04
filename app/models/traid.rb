@@ -10,6 +10,12 @@ class Traid < ApplicationRecord
     self.key = SecureRandom.hex(4).upcase unless self.key
   end
   
+  def partner
+    Traid.where(key: self.key).each do |traid|
+      return traid if traid.id != self.id # Method to be modified if group traids are implemented
+    end
+  end
+  
   class << self
     
     def get_active_traids(user)
