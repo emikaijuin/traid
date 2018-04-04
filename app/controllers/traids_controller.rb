@@ -103,6 +103,26 @@ class TraidsController < ApplicationController
       redirect_to traid_path(@canceler_traid)
     end    
   end
+  
+  def recent_traid_locations
+    recent_traid_locations = []
+    recent_traid_pairs = []
+    keys = []
+    Traid.all.each do |traid|
+      if traid.user.full_address && traid.partner.user.full_address
+        recent_traid_locations << traid.user.convert_address_to_coords 
+        if !keys.include?(traid.key)
+          keys << traid.key
+          location_pair = [traid.user.convert_address_to_coords, traid.partner.user.convert_address_to_coords]
+          recent_traid_pairs << location_pair
+        end
+      end
+    end
+    @result = {
+      "coordinate_list" => recent_traid_locations, 
+      "coordinate_pairs" => recent_traid_pairs}
+    render json: @result
+  end
 
   private
     def set_traid
