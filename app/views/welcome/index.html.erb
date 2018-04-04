@@ -36,7 +36,7 @@
 function appendMarkersToMap(coordinatePairs){
   coordinatePairs.forEach(function(coordinatePair){
     coordinatePair.forEach(function(coordinates){
-      coordinates = new google.maps.LatLng(coordinates["lat"],coordinates["long"])
+      coordinates = new google.maps.LatLng(coordinates["lat"],coordinates["lng"])
       var circle = new google.maps.Marker({
         position: coordinates,
         map: map      
@@ -50,8 +50,8 @@ function appendLinesToMap(coordinatePairs){
     var polyline = new google.maps.Polyline({
       path: coordinatePair,
       strokeColor: "#FF0000",
-      strokeOpacity: 1.0,
-      strokeWeight: 2
+      strokeOpacity: 0.8,
+      strokeWeight: 1
     });
     polyline.setMap(map);
   });
